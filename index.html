@@ -3,23 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>The Room I Made For You</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@400;500;600&display=swap" rel="stylesheet">
+<title>for babyyy</title>
 
 <style>
-:root{
-  --bg:#0b0b0d;
-  --cream:#eee7dc;
-  --soft:#b9b0a4;
-  --rose:#b88f8d;
-  --gold:#c8aa78;
-  --glass:rgba(255,255,255,.07);
-  --line:rgba(255,255,255,.12);
-}
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -27,1230 +13,1209 @@
   -webkit-tap-highlight-color:transparent;
 }
 
+:root{
+  --white:#f5f5f5;
+  --gray:#a8a8ad;
+  --dark:#09090b;
+  --card:#18181c;
+  --pink:#e8a7ad;
+}
+
 html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  background:var(--bg);
-  color:var(--cream);
-  font-family:"DM Sans",sans-serif;
+  background:#000;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+  color:white;
 }
 
 button{
-  border:0;
-  outline:0;
   font:inherit;
+  border:0;
   color:inherit;
-  cursor:pointer;
 }
 
-.hidden{
-  display:none!important;
-}
+/* =========================
+   PHONE
+========================= */
 
-/* INTRO */
-
-#intro{
+.phone{
   position:fixed;
   inset:0;
-  z-index:1000;
-  background:
-    radial-gradient(circle at 50% 40%,rgba(184,143,141,.12),transparent 35%),
-    #09090b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  transition:opacity 1.2s ease,visibility 1.2s ease;
-}
-
-.intro-content{
-  width:90%;
-  max-width:420px;
-}
-
-.eyebrow{
-  font-size:10px;
-  letter-spacing:4px;
-  color:#938b82;
-  margin-bottom:25px;
-}
-
-.intro-title{
-  font-family:"Playfair Display",serif;
-  font-size:clamp(40px,12vw,70px);
-  line-height:.98;
-  font-weight:400;
-}
-
-.intro-title em{
-  color:#c4a4a0;
-}
-
-.intro-sub{
-  margin:25px auto 35px;
-  max-width:280px;
-  color:#918b85;
-  font-size:13px;
-  line-height:1.7;
-}
-
-.enter-btn{
-  background:#eee7dc;
-  color:#111;
-  padding:15px 27px;
-  border-radius:50px;
-  font-size:11px;
-  letter-spacing:2px;
-  font-weight:600;
-  transition:.3s;
-}
-
-.enter-btn:active{
-  transform:scale(.95);
-}
-
-/* ROOM */
-
-#room{
-  position:fixed;
-  inset:0;
-  opacity:0;
-  transition:opacity 1.5s ease;
-}
-
-#room.visible{
-  opacity:1;
-}
-
-.room{
-  position:absolute;
-  inset:0;
+  background:#000;
   overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% 38%,rgba(184,143,141,.14),transparent 42%),
-    linear-gradient(180deg,#171517 0%,#111012 52%,#0a090a 100%);
 }
 
-/* wall */
+/* =========================
+   LOCK SCREEN
+========================= */
 
-.wall{
+#lock{
   position:absolute;
-  inset:0 0 34% 0;
+  inset:0;
+  z-index:100;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.035),transparent),
-    #181618;
-}
-
-.wall:after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:1px;
-  background:rgba(255,255,255,.08);
-}
-
-/* floor */
-
-.floor{
-  position:absolute;
-  left:-10%;
-  right:-10%;
-  bottom:-10%;
-  height:43%;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 80px,
-      rgba(255,255,255,.018) 81px 82px
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.18),
+      rgba(0,0,0,.55)
     ),
-    linear-gradient(180deg,#151315,#090809);
-  transform:perspective(500px) rotateX(8deg);
-  transform-origin:bottom;
+    url("att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg")
+    center/cover;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-top:12vh;
+  transition:opacity .7s ease,transform .7s ease;
 }
 
-/* window */
-
-.window{
-  position:absolute;
-  top:8%;
-  left:7%;
-  width:27%;
-  max-width:145px;
-  height:30%;
-  max-height:230px;
-  border:7px solid #272428;
-  background:
-    radial-gradient(circle at 70% 25%,rgba(255,255,255,.7) 0 1px,transparent 2px),
-    radial-gradient(circle at 25% 45%,rgba(255,255,255,.45) 0 1px,transparent 2px),
-    linear-gradient(160deg,#151b29,#20273a 45%,#10131e);
-  box-shadow:0 12px 40px rgba(0,0,0,.45);
-  overflow:hidden;
-}
-
-.window:before,
-.window:after{
-  content:"";
-  position:absolute;
-  background:#2c2930;
-}
-
-.window:before{
-  width:4px;
-  height:100%;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.window:after{
-  height:4px;
-  width:100%;
-  top:50%;
-  transform:translateY(-50%);
-}
-
-.moon{
-  position:absolute;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  background:#e8e2d4;
-  right:13%;
-  top:13%;
-  box-shadow:0 0 25px rgba(240,230,200,.2);
-}
-
-/* frames */
-
-.frames{
-  position:absolute;
-  top:10%;
-  right:7%;
-  width:47%;
-  max-width:220px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-}
-
-.frame{
-  padding:5px;
-  background:#252126;
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 12px 25px rgba(0,0,0,.35);
-  aspect-ratio:4/5;
-}
-
-.frame:nth-child(2){
-  transform:translateY(18px);
-}
-
-.frame img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  filter:saturate(.8) brightness(.82);
-}
-
-/* bed */
-
-.bed{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:22%;
-  width:72%;
-  max-width:380px;
-  height:29%;
-  min-height:155px;
-}
-
-.headboard{
-  position:absolute;
-  left:8%;
-  right:8%;
-  top:0;
-  height:54%;
-  background:linear-gradient(180deg,#29262a,#211e22);
-  border-radius:15px 15px 4px 4px;
-  box-shadow:0 20px 40px rgba(0,0,0,.35);
-}
-
-.mattress{
-  position:absolute;
-  left:2%;
-  right:2%;
-  bottom:0;
-  height:48%;
-  background:linear-gradient(180deg,#c4b8ac,#8d837b);
-  border-radius:14px 14px 8px 8px;
-  box-shadow:0 20px 30px rgba(0,0,0,.4);
-}
-
-.blanket{
-  position:absolute;
-  right:3%;
-  bottom:4%;
-  width:53%;
-  height:38%;
-  background:linear-gradient(140deg,#51434a,#30282e);
-  border-radius:10px 10px 8px 25px;
-}
-
-.pillow{
-  position:absolute;
-  left:13%;
-  bottom:30%;
-  width:29%;
-  height:24%;
-  background:#cfc4b9;
-  border-radius:10px;
-  transform:rotate(-3deg);
-}
-
-/* bedside */
-
-.table{
-  position:absolute;
-  bottom:22%;
-  left:4%;
-  width:18%;
-  max-width:95px;
-  height:15%;
-  background:#242125;
-  border-radius:6px;
-}
-
-.table-top{
-  position:absolute;
-  left:-7%;
-  right:-7%;
-  top:0;
-  height:10px;
-  background:#322c31;
-  border-radius:4px;
-}
-
-.lamp{
-  position:absolute;
-  width:36px;
-  height:42px;
-  top:-48px;
-  left:50%;
-  transform:translateX(-50%);
-}
-
-.lamp-shade{
-  width:34px;
-  height:22px;
-  background:#a99a8a;
-  clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);
-  box-shadow:0 0 35px rgba(200,170,120,.25);
-}
-
-.lamp-glow{
-  position:absolute;
-  width:130px;
-  height:130px;
-  background:radial-gradient(circle,rgba(205,172,118,.16),transparent 65%);
-  left:50%;
-  top:-25px;
-  transform:translateX(-50%);
+#lock.unlocking{
+  opacity:0;
+  transform:scale(1.04);
   pointer-events:none;
 }
 
-/* rug */
-
-.rug{
-  position:absolute;
-  width:55%;
-  max-width:300px;
-  height:18%;
-  bottom:7%;
-  left:50%;
-  transform:translateX(-50%);
-  background:radial-gradient(ellipse,rgba(150,135,130,.28),rgba(90,80,80,.08) 65%,transparent 70%);
-  filter:blur(1px);
+.lock-date{
+  font-size:15px;
+  margin-bottom:4px;
+  color:#eee;
 }
 
-/* objects */
+.lock-time{
+  font-size:72px;
+  font-weight:200;
+  letter-spacing:-4px;
+}
 
-.hotspot{
+.lock-location{
+  margin-top:8px;
+  font-size:12px;
+  color:#ddd;
+}
+
+.lock-bottom{
   position:absolute;
-  z-index:20;
-  width:42px;
-  height:42px;
+  bottom:7%;
+  width:100%;
+  text-align:center;
+}
+
+.face{
+  width:58px;
+  height:58px;
   border-radius:50%;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.2);
-  backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.65);
   display:flex;
   align-items:center;
   justify-content:center;
-  animation:pulse 2.4s infinite;
+  margin:auto;
+  backdrop-filter:blur(10px);
+  font-size:22px;
 }
 
-.hotspot span{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#eee7dc;
+.swipe{
+  margin-top:12px;
+  font-size:11px;
+  color:#ddd;
 }
 
-@keyframes pulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(238,231,220,.08)}
-  50%{box-shadow:0 0 0 9px rgba(238,231,220,0)}
-}
+/* =========================
+   PASSCODE
+========================= */
 
-.hs-bed{
-  left:50%;
-  bottom:32%;
-  transform:translateX(-50%);
-}
-
-.hs-wall{
-  right:22%;
-  top:31%;
-}
-
-.hs-desk{
-  left:9%;
-  bottom:31%;
-}
-
-.hs-window{
-  left:17%;
-  top:31%;
-}
-
-.hs-phone{
-  right:8%;
-  bottom:27%;
-}
-
-.hs-drawer{
-  left:7%;
-  bottom:21%;
-}
-
-.hs-plush{
-  right:23%;
-  bottom:29%;
-}
-
-.hs-light{
-  right:5%;
-  top:54%;
-}
-
-/* labels */
-
-.room-title{
+#passcode{
   position:absolute;
-  left:6%;
-  bottom:5%;
-  z-index:30;
-}
-
-.room-title small{
-  display:block;
-  font-size:9px;
-  letter-spacing:3px;
-  color:#817a76;
-  margin-bottom:5px;
-}
-
-.room-title strong{
-  font-family:"Playfair Display",serif;
-  font-size:19px;
-  font-weight:400;
-}
-
-/* modal */
-
-.modal{
-  position:fixed;
   inset:0;
-  z-index:500;
-  background:rgba(5,5,6,.72);
-  backdrop-filter:blur(14px);
+  z-index:110;
+  background:rgba(5,5,6,.96);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  padding-top:12vh;
+}
+
+#passcode.show{
   display:flex;
-  align-items:flex-end;
-  opacity:0;
-  pointer-events:none;
-  transition:.35s;
 }
 
-.modal.open{
-  opacity:1;
-  pointer-events:auto;
+.pass-title{
+  font-size:18px;
+  margin-bottom:7px;
 }
 
-.sheet{
-  width:100%;
-  max-height:82vh;
-  overflow:auto;
-  background:#171518;
-  border-top:1px solid rgba(255,255,255,.12);
-  border-radius:25px 25px 0 0;
-  padding:25px 22px 35px;
-  transform:translateY(30px);
-  transition:.4s;
+.pass-sub{
+  color:#888;
+  font-size:12px;
 }
 
-.modal.open .sheet{
-  transform:translateY(0);
+.dots{
+  display:flex;
+  gap:10px;
+  margin:25px 0;
 }
 
-.close{
-  float:right;
-  width:34px;
-  height:34px;
+.dot{
+  width:9px;
+  height:9px;
   border-radius:50%;
-  background:rgba(255,255,255,.07);
+  border:1px solid #777;
+}
+
+.dot.active{
+  background:white;
+}
+
+.keypad{
+  display:grid;
+  grid-template-columns:repeat(3,72px);
+  gap:14px;
+}
+
+.key{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:#202024;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+}
+
+.key small{
+  font-size:8px;
   color:#aaa;
+  margin-top:2px;
 }
 
-.sheet-kicker{
-  clear:both;
-  padding-top:14px;
-  font-size:9px;
-  letter-spacing:3px;
-  color:#8f8881;
-  text-transform:uppercase;
+.key:active{
+  background:#38383d;
 }
 
-.sheet h2{
-  margin-top:8px;
-  font-family:"Playfair Display",serif;
-  font-size:31px;
-  font-weight:400;
+.cancel{
+  margin-top:22px;
+  background:none;
+  color:#aaa;
+  font-size:13px;
 }
 
-.sheet p{
-  margin-top:16px;
-  color:#aaa39b;
-  line-height:1.8;
+/* =========================
+   HOME
+========================= */
+
+#home{
+  position:absolute;
+  inset:0;
+  display:none;
+  background:
+    linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.35)),
+    url("att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg")
+    center/cover;
+}
+
+#home.show{
+  display:block;
+}
+
+.status{
+  position:absolute;
+  top:12px;
+  left:20px;
+  right:20px;
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  z-index:20;
+}
+
+.apps{
+  position:absolute;
+  top:11%;
+  left:6%;
+  right:6%;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px 14px;
+}
+
+.app{
+  text-align:center;
+}
+
+.icon{
+  width:58px;
+  height:58px;
+  border-radius:15px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  box-shadow:0 7px 18px rgba(0,0,0,.28);
+}
+
+.app-name{
+  margin-top:6px;
+  font-size:10px;
+  text-shadow:0 1px 5px #000;
+}
+
+/* icons */
+
+.messages{
+  background:linear-gradient(#75d66d,#42b94d);
+}
+
+.photos{
+  background:linear-gradient(135deg,#ff6b9d,#ffd56a,#6fc8ff);
+}
+
+.notes{
+  background:#f4e9a8;
+  color:#292929;
+}
+
+.music{
+  background:linear-gradient(135deg,#9b5de5,#f15bb5);
+}
+
+.calendar{
+  background:#eee;
+  color:#222;
+}
+
+.heartapp{
+  background:#19191d;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+.camera{
+  background:#34343a;
+}
+
+.secretapp{
+  background:#111;
+  border:1px solid #555;
+}
+
+/* dock */
+
+.dock{
+  position:absolute;
+  bottom:24px;
+  left:5%;
+  right:5%;
+  height:76px;
+  border-radius:24px;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(25px);
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+}
+
+.dock .icon{
+  width:52px;
+  height:52px;
+}
+
+/* =========================
+   APP WINDOW
+========================= */
+
+.app-window{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  background:#0c0c0e;
+  display:none;
+  animation:openApp .3s ease;
+}
+
+.app-window.show{
+  display:block;
+}
+
+@keyframes openApp{
+  from{
+    opacity:0;
+    transform:scale(.94);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.app-header{
+  height:90px;
+  padding:52px 20px 0;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.back{
+  background:none;
+  font-size:27px;
+  color:#e7a7ad;
+}
+
+.app-header h2{
+  font-size:22px;
+  font-weight:600;
+}
+
+.app-content{
+  height:calc(100% - 90px);
+  overflow:auto;
+  padding:20px;
+}
+
+/* =========================
+   MESSAGES APP
+========================= */
+
+.chat-date{
+  text-align:center;
+  color:#777;
+  font-size:11px;
+  margin:8px 0 20px;
+}
+
+.bubble{
+  max-width:78%;
+  padding:10px 14px;
+  border-radius:18px;
+  margin-bottom:8px;
   font-size:14px;
+  line-height:1.45;
 }
 
-/* photos modal */
+.bubble.left{
+  background:#26262b;
+  color:#eee;
+}
+
+.bubble.right{
+  margin-left:auto;
+  background:#d9959e;
+  color:#171217;
+}
+
+.typing{
+  color:#777;
+  font-size:11px;
+  margin:15px 0;
+}
+
+/* =========================
+   PHOTOS
+========================= */
 
 .photo-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:22px;
+  gap:8px;
 }
 
 .photo-grid img{
   width:100%;
-  aspect-ratio:4/5;
+  aspect-ratio:1;
   object-fit:cover;
-  border-radius:8px;
-  filter:saturate(.82);
+  border-radius:10px;
 }
 
-/* letter */
-
-.letter{
-  margin-top:20px;
-  background:#e6dfd3;
-  color:#292426;
-  padding:28px 23px;
-  border-radius:5px;
-  box-shadow:0 20px 50px rgba(0,0,0,.3);
-}
-
-.letter .date{
-  font-size:9px;
-  letter-spacing:2px;
-  color:#80766d;
-}
-
-.letter p{
-  color:#393236;
-  font-family:"Playfair Display",serif;
-  font-size:17px;
-  line-height:1.8;
-  margin-top:18px;
-}
-
-/* music */
-
-.music-card{
-  margin-top:22px;
-  padding:20px;
-  border:1px solid var(--line);
-  border-radius:14px;
-}
-
-.song{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.album{
-  width:54px;
-  height:54px;
-  border-radius:8px;
-  background:
-    linear-gradient(145deg,#a88683,#3b3035);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:"Playfair Display",serif;
-  font-size:21px;
-}
-
-.song-info strong{
-  display:block;
-  font-size:14px;
-  font-weight:500;
-}
-
-.song-info span{
-  display:block;
-  color:#817b76;
-  font-size:11px;
-  margin-top:4px;
-}
-
-.music-btn{
-  width:100%;
-  margin-top:18px;
-  padding:13px;
-  border-radius:8px;
-  background:#eee7dc;
-  color:#111;
-  font-size:11px;
-  letter-spacing:1px;
-}
-
-.visualizer{
-  display:flex;
-  justify-content:center;
-  gap:4px;
-  height:28px;
-  margin-top:15px;
-  align-items:center;
-}
-
-.visualizer i{
-  display:block;
-  width:3px;
-  height:7px;
-  background:#b88f8d;
-  border-radius:3px;
-}
-
-.visualizer.playing i{
-  animation:bars .7s ease-in-out infinite alternate;
-}
-
-.visualizer i:nth-child(2){animation-delay:.1s}
-.visualizer i:nth-child(3){animation-delay:.2s}
-.visualizer i:nth-child(4){animation-delay:.3s}
-.visualizer i:nth-child(5){animation-delay:.15s}
-
-@keyframes bars{
-  from{height:5px}
-  to{height:23px}
-}
-
-/* messages */
-
-.chat{
-  margin-top:20px;
-}
-
-.msg{
-  max-width:82%;
-  padding:11px 14px;
-  border-radius:15px;
-  margin-bottom:9px;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.msg.me{
-  margin-left:auto;
-  background:#332c31;
-}
-
-.msg.her{
-  background:#242125;
-  color:#bcb5ae;
-}
-
-/* night */
-
-.night-text{
-  text-align:center;
-  padding:25px 5px 10px;
-}
-
-.night-text .big{
-  font-family:"Playfair Display",serif;
-  font-size:28px;
-  line-height:1.3;
-}
-
-.night-text .small{
+.photo-caption{
+  color:#777;
   font-size:12px;
-  color:#827b76;
-  margin-top:15px;
+  text-align:center;
+  margin:20px 0;
 }
 
-/* secret */
+/* =========================
+   NOTES
+========================= */
 
-.code-box{
-  margin-top:20px;
-  display:flex;
-  gap:8px;
+.note{
+  background:#f1e7a5;
+  color:#272321;
+  border-radius:5px;
+  padding:24px;
+  min-height:400px;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
 }
 
-.code-box input{
-  flex:1;
-  min-width:0;
-  background:#0e0d0f;
-  border:1px solid var(--line);
-  color:white;
-  padding:13px;
-  border-radius:8px;
-  outline:none;
+.note h3{
+  font-family:Georgia,serif;
+  font-size:22px;
+  margin-bottom:20px;
 }
 
-.code-box button{
-  background:#eee7dc;
+.note p{
+  font-family:Georgia,serif;
+  font-size:16px;
+  line-height:1.8;
+  margin-bottom:15px;
+}
+
+/* =========================
+   MUSIC
+========================= */
+
+.music-screen{
+  text-align:center;
+  padding-top:25px;
+}
+
+.album-art{
+  width:210px;
+  height:210px;
+  margin:auto;
+  border-radius:12px;
+  background:
+    url("att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg")
+    center/cover;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+
+.music-screen h3{
+  margin-top:25px;
+  font-size:20px;
+}
+
+.music-screen p{
+  color:#888;
+  margin-top:5px;
+  font-size:13px;
+}
+
+.play{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:white;
   color:#111;
-  padding:0 18px;
-  border-radius:8px;
+  font-size:22px;
+  margin-top:28px;
+}
+
+/* =========================
+   CALENDAR
+========================= */
+
+.calendar-card{
+  background:#18181c;
+  border-radius:15px;
+  padding:20px;
+}
+
+.calendar-title{
+  font-size:28px;
+  margin-bottom:18px;
+}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
+  text-align:center;
+}
+
+.calendar-grid span{
   font-size:11px;
+  color:#777;
 }
 
-.secret-result{
-  margin-top:18px;
-  color:#cbb7ae;
+.day{
+  padding:8px 0;
+  font-size:12px;
+}
+
+.special{
+  background:#d9959e;
+  color:#151015;
+  border-radius:50%;
+}
+
+/* =========================
+   HEART APP
+========================= */
+
+.heart-screen{
+  text-align:center;
+  padding-top:50px;
+}
+
+.big-heart{
+  font-size:90px;
+  animation:heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  15%{transform:scale(1.12)}
+  30%{transform:scale(1)}
+}
+
+.heart-screen h2{
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:30px;
+  margin-top:25px;
+}
+
+.heart-screen p{
+  color:#888;
+  margin-top:15px;
   line-height:1.7;
-  font-family:"Playfair Display",serif;
-  font-size:18px;
 }
 
-/* final */
+/* =========================
+   SECRET APP
+========================= */
 
-#final{
-  position:fixed;
+.secret-screen{
+  text-align:center;
+  padding-top:60px;
+}
+
+.lock-icon{
+  font-size:55px;
+  margin-bottom:20px;
+}
+
+.secret-screen h2{
+  font-family:Georgia,serif;
+  font-weight:400;
+}
+
+.secret-screen p{
+  color:#777;
+  margin-top:10px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+.secret-btn{
+  margin-top:30px;
+  padding:14px 25px;
+  border-radius:25px;
+  background:#e8a7ad;
+  color:#161116;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+#ending{
+  position:absolute;
   inset:0;
-  z-index:900;
+  z-index:300;
   background:#050506;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
   text-align:center;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 2s ease;
+  padding:30px;
 }
 
-#final.show{
-  opacity:1;
-  pointer-events:auto;
+#ending.show{
+  display:flex;
 }
 
-.final-content{
-  width:90%;
-  max-width:430px;
+.ending-content{
+  max-width:360px;
 }
 
-.final-photo{
-  width:170px;
-  height:220px;
+.ending-photo{
+  width:160px;
+  height:205px;
   object-fit:cover;
-  border-radius:3px;
+  border-radius:4px;
   opacity:0;
-  transform:scale(.92);
-  transition:2s ease 1s;
-  filter:saturate(.75);
-  box-shadow:0 20px 70px rgba(0,0,0,.6);
+  transform:scale(.9);
+  animation:reveal 2s 1s forwards;
 }
 
-#final.show .final-photo{
-  opacity:1;
-  transform:scale(1);
-}
-
-.final-text{
+.ending-text{
   margin-top:30px;
-  opacity:0;
-  transform:translateY(12px);
-  transition:1.5s ease 2.5s;
-}
-
-#final.show .final-text{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.final-text p{
-  font-family:"Playfair Display",serif;
-  font-size:24px;
+  font-family:Georgia,serif;
+  font-size:25px;
   line-height:1.5;
+  opacity:0;
+  animation:fadeUp 1.5s 2.5s forwards;
 }
 
-.final-text span{
-  display:block;
-  margin-top:15px;
-  color:#847d77;
+.ending-small{
+  margin-top:20px;
+  color:#777;
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
   font-size:11px;
   letter-spacing:2px;
-}
-
-/* progress */
-
-.progress{
-  position:absolute;
-  top:0;
-  left:0;
-  width:0;
-  height:2px;
-  background:#c8aa78;
-  z-index:100;
-  transition:width .5s;
-}
-
-/* LIGHT OFF */
-
-body.lights-off .room{
-  filter:brightness(.42);
-}
-
-body.lights-off .hotspot{
-  background:rgba(255,255,255,.04);
-}
-
-body.lights-off .lamp-glow{
   opacity:0;
+  animation:fadeUp 1.5s 3.5s forwards;
 }
 
-/* responsive */
-
-@media(max-height:680px){
-  .bed{bottom:20%;height:27%}
-  .room-title{bottom:3%}
-  .window{top:6%;height:27%}
-}
-
-@media(min-width:700px){
-  .room{
-    max-width:900px;
-    left:50%;
-    transform:translateX(-50%);
+@keyframes reveal{
+  to{
+    opacity:1;
+    transform:scale(1);
   }
 }
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="phone">
+
 <!-- =========================
-     INTRO
+     LOCK SCREEN
 ========================= -->
 
-<section id="intro">
-  <div class="intro-content">
-    <div class="eyebrow">A PRIVATE PLACE</div>
+<section id="lock">
 
-    <h1 class="intro-title">
-      The Room<br>
-      I Made <em>For You.</em>
-    </h1>
+  <div class="lock-date" id="date"></div>
+  <div class="lock-time" id="time">11:11</div>
 
-    <p class="intro-sub">
-      There are no rules here.<br>
-      Just tap around and see what you find.
-    </p>
-
-    <button class="enter-btn" onclick="enterRoom()">
-      ENTER MY ROOM
-    </button>
+  <div class="lock-location">
+    ♡ for babyyy
   </div>
+
+  <div class="lock-bottom">
+
+    <div class="face" onclick="showPasscode()">
+      ♡
+    </div>
+
+    <div class="swipe">
+      tap to unlock
+    </div>
+
+  </div>
+
 </section>
 
 
 <!-- =========================
-     ROOM
+     PASSCODE
 ========================= -->
 
-<main id="room">
+<section id="passcode">
 
-  <div class="room">
+  <div class="pass-title">
+    Enter Passcode
+  </div>
 
-    <div class="progress" id="progress"></div>
+  <div class="pass-sub">
+    hint: the day everything started
+  </div>
 
-    <div class="wall"></div>
-    <div class="floor"></div>
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
 
-    <!-- WINDOW -->
-    <div class="window">
-      <div class="moon"></div>
+  <div class="keypad">
+
+    <button class="key" onclick="press(1)">1</button>
+    <button class="key" onclick="press(2)">2 ABC</button>
+    <button class="key" onclick="press(3)">3 DEF</button>
+
+    <button class="key" onclick="press(4)">4 GHI</button>
+    <button class="key" onclick="press(5)">5 JKL</button>
+    <button class="key" onclick="press(6)">6 MNO</button>
+
+    <button class="key" onclick="press(7)">7 PQRS</button>
+    <button class="key" onclick="press(8)">8 TUV</button>
+    <button class="key" onclick="press(9)">9 WXYZ</button>
+
+    <button class="key" onclick="press(0)">0</button>
+
+  </div>
+
+  <button class="cancel" onclick="hidePasscode()">
+    Cancel
+  </button>
+
+</section>
+
+
+<!-- =========================
+     HOME SCREEN
+========================= -->
+
+<section id="home">
+
+  <div class="status">
+    <span id="homeTime">11:11</span>
+    <span>● ● ●  ▰</span>
+  </div>
+
+  <div class="apps">
+
+    <div class="app" onclick="openApp('messages')">
+      <div class="icon messages">●</div>
+      <div class="app-name">Messages</div>
     </div>
 
-    <!-- WALL PHOTOS -->
-    <div class="frames">
-      <div class="frame hotspotTarget" onclick="openModal('photos')">
-        <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-      </div>
-
-      <div class="frame hotspotTarget" onclick="openModal('photos')">
-        <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
-      </div>
-
-      <div class="frame hotspotTarget" onclick="openModal('photos')">
-        <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
-      </div>
-
-      <div class="frame hotspotTarget" onclick="openModal('photos')">
-        <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
-      </div>
+    <div class="app" onclick="openApp('photos')">
+      <div class="icon photos">✿</div>
+      <div class="app-name">Photos</div>
     </div>
 
-    <!-- BED -->
-    <div class="bed">
-      <div class="headboard"></div>
-      <div class="mattress"></div>
-      <div class="blanket"></div>
-      <div class="pillow"></div>
+    <div class="app" onclick="openApp('notes')">
+      <div class="icon notes">☰</div>
+      <div class="app-name">Notes</div>
     </div>
 
-    <!-- SIDE TABLE -->
-    <div class="table">
-      <div class="table-top"></div>
-      <div class="lamp">
-        <div class="lamp-shade"></div>
-        <div class="lamp-glow"></div>
-      </div>
+    <div class="app" onclick="openApp('music')">
+      <div class="icon music">♪</div>
+      <div class="app-name">Music</div>
     </div>
 
-    <div class="rug"></div>
+    <div class="app" onclick="openApp('calendar')">
+      <div class="icon calendar">17</div>
+      <div class="app-name">Calendar</div>
+    </div>
 
-    <!-- HOTSPOTS -->
+    <div class="app" onclick="openApp('heart')">
+      <div class="icon heartapp">♡</div>
+      <div class="app-name">For You</div>
+    </div>
 
-    <button class="hotspot hs-bed" onclick="openModal('rest')" aria-label="Bed">
-      <span></span>
-    </button>
+    <div class="app" onclick="openApp('camera')">
+      <div class="icon camera">⌾</div>
+      <div class="app-name">Camera</div>
+    </div>
 
-    <button class="hotspot hs-wall" onclick="openModal('photos')" aria-label="Photos">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-desk" onclick="openModal('letter')" aria-label="Letter">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-window" onclick="openModal('night')" aria-label="Window">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-phone" onclick="openModal('messages')" aria-label="Phone">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-drawer" onclick="openModal('secret')" aria-label="Drawer">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-plush" onclick="openModal('know')" aria-label="Plushie">
-      <span></span>
-    </button>
-
-    <button class="hotspot hs-light" onclick="toggleLights()" aria-label="Light">
-      <span></span>
-    </button>
-
-    <div class="room-title">
-      <small>MY LITTLE PLACE</small>
-      <strong>for you, babyyy.</strong>
+    <div class="app" onclick="openApp('secret')">
+      <div class="icon secretapp">?</div>
+      <div class="app-name">Unknown</div>
     </div>
 
   </div>
 
-</main>
+
+  <div class="dock">
+
+    <div class="icon messages" onclick="openApp('messages')">
+      ●
+    </div>
+
+    <div class="icon photos" onclick="openApp('photos')">
+      ✿
+    </div>
+
+    <div class="icon music" onclick="openApp('music')">
+      ♪
+    </div>
+
+    <div class="icon heartapp" onclick="openApp('heart')">
+      ♡
+    </div>
+
+  </div>
+
+</section>
 
 
 <!-- =========================
-     MODALS
+     APP WINDOWS
 ========================= -->
 
-<div class="modal" id="modal">
-  <div class="sheet">
+<section class="app-window" id="messages">
 
-    <button class="close" onclick="closeModal()">×</button>
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Messages</h2>
+  </div>
 
-    <!-- REST -->
-    <div class="modal-content" id="rest">
-      <div class="sheet-kicker">The Bed</div>
-      <h2>When you need rest.</h2>
+  <div class="app-content">
+
+    <div class="chat-date">
+      today
+    </div>
+
+    <div class="bubble left">
+      babyyy
+    </div>
+
+    <div class="bubble right">
+      hmm? what's up?
+    </div>
+
+    <div class="bubble left">
+      wala lang
+    </div>
+
+    <div class="bubble right">
+      you just wanted my attention 😭
+    </div>
+
+    <div class="bubble left">
+      maybeee
+    </div>
+
+    <div class="bubble right">
+      come here then.
+    </div>
+
+    <div class="bubble left">
+      HAHAHAHA
+    </div>
+
+    <div class="bubble right">
+      see? that's my favorite sound.
+    </div>
+
+    <div class="typing">
+      i love you more than i usually say.
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="photos">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Photos</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="photo-grid">
+
+      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
+
+      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
+
+      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
+
+      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
+
+      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
+
+      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
+
+      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
+
+    </div>
+
+    <div class="photo-caption">
+      7 photos I couldn't stop looking at.
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="notes">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Notes</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="note">
+
+      <h3>for babyyy ♡</h3>
 
       <p>
-        You don't have to be okay all the time.
-        You don't have to explain everything.
-        You don't have to carry everything by yourself.
+        I don't always know how to explain
+        what you mean to me.
       </p>
 
       <p>
-        Rest when you're tired, babyyy.
-        Take a breath.
-        I'll still be here when you wake up.
+        Sometimes I joke around.
+        Sometimes I annoy you.
+        Sometimes I don't say much.
       </p>
-    </div>
-
-
-    <!-- PHOTOS -->
-    <div class="modal-content hidden" id="photos">
-      <div class="sheet-kicker">Our Wall</div>
-      <h2>Little pieces of you.</h2>
 
       <p>
-        If I could keep every moment I love about you,
-        I'd probably need a much bigger room.
+        But none of that changes the fact
+        that I genuinely care about you.
       </p>
-
-      <div class="photo-grid">
-
-        <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-        <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
-        <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
-        <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
-        <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
-        <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
-        <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
-
-      </div>
-    </div>
-
-
-    <!-- LETTER -->
-    <div class="modal-content hidden" id="letter">
-      <div class="sheet-kicker">The Desk</div>
-      <h2>Open this.</h2>
-
-      <div class="letter">
-
-        <div class="date">FOR BABYYY — ALWAYS</div>
-
-        <p>
-          I don't always know how to say everything
-          I feel for you.
-        </p>
-
-        <p>
-          Sometimes I joke.
-          Sometimes I tease you.
-          Sometimes I just stay quiet.
-        </p>
-
-        <p>
-          But underneath all of that,
-          there's someone who genuinely cares about you
-          more than he knows how to explain.
-        </p>
-
-        <p>
-          So if you ever wonder whether you matter to me,
-          come back to this little room.
-        </p>
-
-        <p>
-          You do.
-          More than you probably realize.
-        </p>
-
-        <p>
-          — j
-        </p>
-
-      </div>
-    </div>
-
-
-    <!-- NIGHT -->
-    <div class="modal-content hidden" id="night">
-      <div class="sheet-kicker">The Window</div>
-
-      <div class="night-text">
-
-        <div class="big">
-          If you're looking at this<br>
-          while everyone else is asleep...
-        </div>
-
-        <div class="small">
-          I hope you're thinking about how loved you are.
-        </div>
-
-      </div>
-    </div>
-
-
-    <!-- MESSAGES -->
-    <div class="modal-content hidden" id="messages">
-      <div class="sheet-kicker">The Phone</div>
-      <h2>Our little conversations.</h2>
-
-      <div class="chat">
-
-        <div class="msg her">
-          babyyy
-        </div>
-
-        <div class="msg me">
-          hmm?
-        </div>
-
-        <div class="msg her">
-          wala lang hehe
-        </div>
-
-        <div class="msg me">
-          you just wanted my attention no?
-        </div>
-
-        <div class="msg her">
-          maybeee
-        </div>
-
-        <div class="msg me">
-          come here then.
-        </div>
-
-        <div class="msg her">
-          HAHAHAHAHA
-        </div>
-
-        <div class="msg me">
-          see. that's my favorite sound.
-        </div>
-
-      </div>
-    </div>
-
-
-    <!-- SECRET -->
-    <div class="modal-content hidden" id="secret">
-      <div class="sheet-kicker">The Drawer</div>
-      <h2>Don't open this.</h2>
 
       <p>
-        Seriously.
-        There's nothing interesting here.
+        If you ever feel like you're not enough,
+        I hope you remember that someone out here
+        sees you differently.
       </p>
 
-      <div class="code-box">
+      <p>
+        You are someone I want to keep.
+      </p>
 
-        <input
-          id="secretInput"
-          type="password"
-          inputmode="numeric"
-          maxlength="8"
-          placeholder="Enter the code"
-        >
+      <p>
+        — j
+      </p>
 
-        <button onclick="unlockSecret()">
-          OPEN
-        </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="music">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Music</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="music-screen">
+
+      <div class="album-art"></div>
+
+      <h3>Paraluman</h3>
+
+      <p>Adie</p>
+
+      <button class="play" onclick="toggleMusic()">
+        <span id="playIcon">▶</span>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="calendar">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Calendar</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="calendar-card">
+
+      <div class="calendar-title">
+        September 2026
+      </div>
+
+      <div class="calendar-grid">
+
+        <span>S</span>
+        <span>M</span>
+        <span>T</span>
+        <span>W</span>
+        <span>T</span>
+        <span>F</span>
+        <span>S</span>
+
+        <span></span>
+        <span></span>
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span class="day special">4</span>
+        <span>5</span>
+
+        <span>6</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span>10</span>
+        <span>11</span>
+        <span>12</span>
+
+        <span>13</span>
+        <span>14</span>
+        <span>15</span>
+        <span>16</span>
+        <span>17</span>
+        <span>18</span>
+        <span>19</span>
+
+        <span>20</span>
+        <span>21</span>
+        <span>22</span>
+        <span>23</span>
+        <span>24</span>
+        <span>25</span>
+        <span>26</span>
+
+        <span>27</span>
+        <span>28</span>
+        <span>29</span>
+        <span>30</span>
 
       </div>
 
-      <div id="secretResult" class="secret-result"></div>
     </div>
 
+  </div>
 
-    <!-- KNOW -->
-    <div class="modal-content hidden" id="know">
-      <div class="sheet-kicker">Something I Want You To Know</div>
-      <h2>Just one thing.</h2>
+</section>
 
-      <p id="randomMessage">
-        You're someone I don't want to lose.
+
+<section class="app-window" id="heart">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>For You</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="heart-screen">
+
+      <div class="big-heart">
+        ♡
+      </div>
+
+      <h2>
+        you.
+      </h2>
+
+      <p>
+        Out of all the people I could have met,
+        I'm glad it was you.
+      </p>
+
+      <p>
+        And if I had to choose again,
+        I'd still choose you.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="camera">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Camera</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div style="
+      height:70vh;
+      border-radius:20px;
+      background:
+      url('att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg')
+      center/cover;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding-bottom:30px;
+    ">
+
+      <div style="
+        background:rgba(0,0,0,.55);
+        padding:12px 20px;
+        border-radius:20px;
+        font-size:12px;
+      ">
+        my favorite view
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="app-window" id="secret">
+
+  <div class="app-header">
+    <button class="back" onclick="closeApp()">‹</button>
+    <h2>Unknown</h2>
+  </div>
+
+  <div class="app-content">
+
+    <div class="secret-screen">
+
+      <div class="lock-icon">
+        🔒
+      </div>
+
+      <h2>
+        You found something.
+      </h2>
+
+      <p>
+        This app wasn't supposed to be visible.
+        <br>
+        But since you're already here...
       </p>
 
       <button
-        class="music-btn"
-        onclick="newMessage()"
+        class="secret-btn"
+        onclick="showEnding()"
       >
-        TELL ME ANOTHER
+        OPEN
       </button>
-    </div>
-
-
-    <!-- MUSIC -->
-    <div class="modal-content hidden" id="music">
-
-      <div class="sheet-kicker">Headphones</div>
-      <h2>Play this when you miss me.</h2>
-
-      <div class="music-card">
-
-        <div class="song">
-
-          <div class="album">
-            ♡
-          </div>
-
-          <div class="song-info">
-            <strong>Paraluman</strong>
-            <span>Adie</span>
-          </div>
-
-        </div>
-
-        <button class="music-btn" onclick="toggleMusic()">
-          <span id="musicButtonText">PLAY SONG</span>
-        </button>
-
-        <div class="visualizer" id="visualizer">
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
-
-      </div>
 
     </div>
 
   </div>
-</div>
+
+</section>
 
 
 <!-- =========================
-     FINAL
+     ENDING
 ========================= -->
 
-<section id="final">
+<section id="ending">
 
-  <div class="final-content">
+  <div class="ending-content">
 
     <img
-      class="final-photo"
+      class="ending-photo"
       src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg"
     >
 
-    <div class="final-text">
+    <div class="ending-text">
 
-      <p>
-        Home was never the room.
-      </p>
+      I could make a thousand
+      little things for you...
 
-      <p>
-        It was you.
-      </p>
+    </div>
 
-      <span>
-        goodnight, babyyy. ♡
-      </span>
+    <div class="ending-small">
+
+      BUT I'D STILL RATHER JUST HAVE YOU
 
     </div>
 
@@ -1261,7 +1226,7 @@ body.lights-off .lamp-glow{
 
 <audio
   id="song"
-  src="Adie - Paraluman (Lyrics).mp3"
+  src="music/Adie - Paraluman (Lyrics).mp3"
   preload="auto"
 ></audio>
 
@@ -1269,110 +1234,183 @@ body.lights-off .lamp-glow{
 <script>
 
 /* =========================
-   BASIC SETUP
+   CLOCK
 ========================= */
 
-const intro = document.getElementById("intro");
-const room = document.getElementById("room");
-const modal = document.getElementById("modal");
-const progress = document.getElementById("progress");
-const song = document.getElementById("song");
+function updateClock(){
 
-let discovered = new Set();
+  const now = new Date();
 
-const totalPlaces = 7;
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours || 12;
+
+  minutes =
+    minutes < 10
+    ? "0" + minutes
+    : minutes;
+
+  document.getElementById("time")
+    .textContent =
+    hours + ":" + minutes;
+
+  document.getElementById("homeTime")
+    .textContent =
+    hours + ":" + minutes;
+
+  document.getElementById("date")
+    .textContent =
+    now.toLocaleDateString(
+      "en-US",
+      {
+        weekday:"long",
+        month:"long",
+        day:"numeric"
+      }
+    );
+
+}
+
+updateClock();
+setInterval(updateClock,1000);
 
 
 /* =========================
-   ENTER ROOM
+   PASSCODE
 ========================= */
 
-function enterRoom(){
+let code = "";
 
-  intro.style.opacity = "0";
-  intro.style.visibility = "hidden";
+const correctCode = "09042026";
 
-  setTimeout(() => {
-    room.classList.add("visible");
+function showPasscode(){
+
+  document
+    .getElementById("passcode")
+    .classList.add("show");
+
+}
+
+function hidePasscode(){
+
+  document
+    .getElementById("passcode")
+    .classList.remove("show");
+
+  code = "";
+
+  updateDots();
+
+}
+
+function press(number){
+
+  if(code.length >= 8) return;
+
+  code += number;
+
+  updateDots();
+
+  if(code.length === 8){
+
+    setTimeout(()=>{
+
+      if(code === correctCode){
+
+        unlockPhone();
+
+      }else{
+
+        code = "";
+
+        updateDots();
+
+        if(navigator.vibrate){
+          navigator.vibrate(300);
+        }
+
+      }
+
+    },200);
+
+  }
+
+}
+
+function updateDots(){
+
+  const dots =
+    document.querySelectorAll(".dot");
+
+  dots.forEach((dot,index)=>{
+
+    dot.classList.toggle(
+      "active",
+      index < code.length
+    );
+
+  });
+
+}
+
+
+/* =========================
+   UNLOCK
+========================= */
+
+function unlockPhone(){
+
+  document
+    .getElementById("passcode")
+    .classList.remove("show");
+
+  document
+    .getElementById("lock")
+    .classList.add("unlocking");
+
+  setTimeout(()=>{
+
+    document
+      .getElementById("home")
+      .classList.add("show");
+
   },500);
 
 }
 
 
 /* =========================
-   OPEN MODAL
+   APPS
 ========================= */
 
-function openModal(id){
+function openApp(name){
 
-  document.querySelectorAll(".modal-content").forEach(el=>{
-    el.classList.add("hidden");
-  });
+  document
+    .querySelectorAll(".app-window")
+    .forEach(app=>{
+      app.classList.remove("show");
+    });
 
-  const target = document.getElementById(id);
+  const app =
+    document.getElementById(name);
 
-  if(target){
-    target.classList.remove("hidden");
+  if(app){
+    app.classList.add("show");
   }
-
-  modal.classList.add("open");
-
-  discovered.add(id);
-
-  updateProgress();
 
 }
 
+function closeApp(){
 
-/* =========================
-   CLOSE MODAL
-========================= */
-
-function closeModal(){
-  modal.classList.remove("open");
-}
-
-
-/* =========================
-   CLOSE BY BACKDROP
-========================= */
-
-modal.addEventListener("click",function(e){
-
-  if(e.target === modal){
-    closeModal();
-  }
-
-});
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-function updateProgress(){
-
-  const count = discovered.size;
-
-  let percent = Math.min(
-    (count / totalPlaces) * 100,
-    100
-  );
-
-  progress.style.width = percent + "%";
-
-  /*
-    When enough objects have been explored,
-    show the final screen.
-  */
-
-  if(count >= totalPlaces){
-
-    setTimeout(()=>{
-      showFinal();
-    },1800);
-
-  }
+  document
+    .querySelectorAll(".app-window")
+    .forEach(app=>{
+      app.classList.remove("show");
+    });
 
 }
 
@@ -1381,226 +1419,91 @@ function updateProgress(){
    MUSIC
 ========================= */
 
+const song =
+  document.getElementById("song");
+
 function toggleMusic(){
 
-  const visualizer =
-    document.getElementById("visualizer");
-
-  const text =
-    document.getElementById("musicButtonText");
+  const icon =
+    document.getElementById("playIcon");
 
   if(song.paused){
 
     song.play()
       .then(()=>{
-
-        text.textContent = "PAUSE SONG";
-        visualizer.classList.add("playing");
-
+        icon.textContent = "Ⅱ";
       })
       .catch(()=>{
-
-        text.textContent = "TAP AGAIN";
-
+        icon.textContent = "▶";
       });
 
   }else{
 
     song.pause();
 
-    text.textContent = "PLAY SONG";
-
-    visualizer.classList.remove("playing");
+    icon.textContent = "▶";
 
   }
 
 }
 
-
-/* =========================
-   LIGHT SWITCH
-========================= */
-
-function toggleLights(){
-
-  document.body.classList.toggle("lights-off");
-
-  discovered.add("lights");
-
-  updateProgress();
-
-}
-
-
-/* =========================
-   SECRET DRAWER
-========================= */
-
-function unlockSecret(){
-
-  const input =
-    document.getElementById("secretInput");
-
-  const result =
-    document.getElementById("secretResult");
-
-  /*
-    SECRET CODE
-    You can change this number.
-  */
-
-  if(input.value === "09042026"){
-
-    result.innerHTML = `
-      Okay... you found it.<br><br>
-      This is probably the part where I admit
-      that I made all of this because I really,
-      really love you.
-      <br><br>
-      You weren't supposed to find this that fast. ♡
-    `;
-
-    discovered.add("secret");
-
-    updateProgress();
-
-  }else{
-
-    result.textContent =
-      "wrong code... try again, babyyy.";
-
+song.addEventListener(
+  "ended",
+  ()=>{
+    document
+      .getElementById("playIcon")
+      .textContent = "▶";
   }
-
-}
-
-
-/* =========================
-   RANDOM MESSAGES
-========================= */
-
-const messages = [
-
-  "You're someone I don't want to lose.",
-
-  "I hope you know how special you are to me.",
-
-  "Even on your worst days, I'd still choose you.",
-
-  "You make ordinary days feel different.",
-
-  "I like having you in my life more than I say.",
-
-  "You're one of my favorite people.",
-
-  "I hope I can keep making you smile.",
-
-  "If you ever forget, come back here.",
-
-  "You are loved. Very, very much.",
-
-  "And yes... I still get happy when I see your name."
-
-];
-
-function newMessage(){
-
-  const box =
-    document.getElementById("randomMessage");
-
-  const random =
-    Math.floor(Math.random() * messages.length);
-
-  box.style.opacity = "0";
-
-  setTimeout(()=>{
-
-    box.textContent = messages[random];
-
-    box.style.opacity = "1";
-
-  },250);
-
-}
+);
 
 
 /* =========================
-   FINAL SCREEN
+   FINAL
 ========================= */
 
-function showFinal(){
-
-  const final =
-    document.getElementById("final");
-
-  final.classList.add("show");
-
-}
-
-
-/* =========================
-   ESCAPE KEY
-========================= */
-
-document.addEventListener("keydown",function(e){
-
-  if(e.key === "Escape"){
-    closeModal();
-  }
-
-});
-
-
-/* =========================
-   SWIPE DOWN MODAL
-========================= */
-
-let startY = 0;
-
-document
-.querySelector(".sheet")
-.addEventListener("touchstart",function(e){
-
-  startY = e.touches[0].clientY;
-
-},{passive:true});
-
-
-document
-.querySelector(".sheet")
-.addEventListener("touchend",function(e){
-
-  const endY =
-    e.changedTouches[0].clientY;
-
-  if(endY - startY > 100){
-    closeModal();
-  }
-
-},{passive:true});
-
-
-/* =========================
-   AUDIO RESET
-========================= */
-
-song.addEventListener("ended",function(){
+function showEnding(){
 
   document
-    .getElementById("musicButtonText")
-    .textContent = "PLAY SONG";
+    .getElementById("ending")
+    .classList.add("show");
 
-  document
-    .getElementById("visualizer")
-    .classList.remove("playing");
-
-});
+}
 
 
 /* =========================
-   FIRST LOAD
+   SWIPE BACK
 ========================= */
 
-room.classList.remove("visible");
+let startX = 0;
+
+document.addEventListener(
+  "touchstart",
+  e=>{
+    startX =
+      e.touches[0].clientX;
+  },
+  {passive:true}
+);
+
+document.addEventListener(
+  "touchend",
+  e=>{
+
+    const endX =
+      e.changedTouches[0].clientX;
+
+    if(
+      startX < 40 &&
+      endX - startX > 80
+    ){
+
+      closeApp();
+
+    }
+
+  },
+  {passive:true}
+);
 
 </script>
 
