@@ -2,706 +2,1084 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>for babyyy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>One Ticket For Two</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
-  -webkit-tap-highlight-color:transparent;
 }
 
-:root{
-  --white:#f5f5f5;
-  --gray:#a8a8ad;
-  --dark:#09090b;
-  --card:#18181c;
-  --pink:#e8a7ad;
+html{
+  scroll-behavior:smooth;
 }
 
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#000;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
-  color:white;
+body{
+  background:#08090c;
+  color:#f5f1ea;
+  font-family:"DM Sans",sans-serif;
+  overflow-x:hidden;
 }
 
 button{
   font:inherit;
-  border:0;
-  color:inherit;
 }
 
+section{
+  position:relative;
+  min-height:100vh;
+  padding:90px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.eyebrow{
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:.45;
+  margin-bottom:18px;
+}
+
+h1,h2{
+  font-family:"Playfair Display",serif;
+  font-weight:500;
+}
+
+h2{
+  font-size:43px;
+  line-height:1.05;
+}
+
+p{
+  color:#aaa39a;
+  line-height:1.8;
+  font-size:14px;
+}
+
+
 /* =========================
-   PHONE
+   INTRO TICKET
 ========================= */
 
-.phone{
+.intro{
   position:fixed;
   inset:0;
-  background:#000;
-  overflow:hidden;
-}
-
-/* =========================
-   LOCK SCREEN
-========================= */
-
-#lock{
-  position:absolute;
-  inset:0;
-  z-index:100;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.18),
-      rgba(0,0,0,.55)
-    ),
-    url("att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg")
-    center/cover;
+  z-index:1000;
+  background:#08090c;
   display:flex;
-  flex-direction:column;
   align-items:center;
-  padding-top:12vh;
-  transition:opacity .7s ease,transform .7s ease;
+  justify-content:center;
+  padding:24px;
+  transition:opacity 1s ease,visibility 1s ease;
 }
 
-#lock.unlocking{
+.intro.hide{
   opacity:0;
-  transform:scale(1.04);
-  pointer-events:none;
+  visibility:hidden;
 }
 
-.lock-date{
-  font-size:15px;
-  margin-bottom:4px;
-  color:#eee;
+.ticket{
+  width:min(390px,100%);
+  background:#eee8dc;
+  color:#111;
+  border-radius:4px;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.7);
+  transform:rotate(-1deg);
 }
 
-.lock-time{
-  font-size:72px;
-  font-weight:200;
-  letter-spacing:-4px;
+.ticket-top{
+  padding:28px;
+  border-bottom:1px dashed #888;
 }
 
-.lock-location{
-  margin-top:8px;
-  font-size:12px;
-  color:#ddd;
+.ticket-label{
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:.5;
 }
 
-.lock-bottom{
-  position:absolute;
-  bottom:7%;
-  width:100%;
-  text-align:center;
+.ticket-title{
+  font-family:"Playfair Display",serif;
+  font-size:40px;
+  line-height:.95;
+  margin:14px 0 25px;
 }
 
-.face{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.65);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto;
-  backdrop-filter:blur(10px);
-  font-size:22px;
-}
-
-.swipe{
-  margin-top:12px;
-  font-size:11px;
-  color:#ddd;
-}
-
-/* =========================
-   PASSCODE
-========================= */
-
-#passcode{
-  position:absolute;
-  inset:0;
-  z-index:110;
-  background:rgba(5,5,6,.96);
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  padding-top:12vh;
-}
-
-#passcode.show{
-  display:flex;
-}
-
-.pass-title{
-  font-size:18px;
-  margin-bottom:7px;
-}
-
-.pass-sub{
-  color:#888;
-  font-size:12px;
-}
-
-.dots{
-  display:flex;
-  gap:10px;
-  margin:25px 0;
-}
-
-.dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  border:1px solid #777;
-}
-
-.dot.active{
-  background:white;
-}
-
-.keypad{
-  display:grid;
-  grid-template-columns:repeat(3,72px);
-  gap:14px;
-}
-
-.key{
-  width:72px;
-  height:72px;
-  border-radius:50%;
-  background:#202024;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-}
-
-.key small{
-  font-size:8px;
-  color:#aaa;
-  margin-top:2px;
-}
-
-.key:active{
-  background:#38383d;
-}
-
-.cancel{
-  margin-top:22px;
-  background:none;
-  color:#aaa;
-  font-size:13px;
-}
-
-/* =========================
-   HOME
-========================= */
-
-#home{
-  position:absolute;
-  inset:0;
-  display:none;
-  background:
-    linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.35)),
-    url("att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg")
-    center/cover;
-}
-
-#home.show{
-  display:block;
-}
-
-.status{
-  position:absolute;
-  top:12px;
-  left:20px;
-  right:20px;
+.ticket-route{
   display:flex;
   justify-content:space-between;
-  font-size:12px;
-  z-index:20;
-}
-
-.apps{
-  position:absolute;
-  top:11%;
-  left:6%;
-  right:6%;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:25px 14px;
-}
-
-.app{
-  text-align:center;
-}
-
-.icon{
-  width:58px;
-  height:58px;
-  border-radius:15px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:26px;
-  box-shadow:0 7px 18px rgba(0,0,0,.28);
-}
-
-.app-name{
-  margin-top:6px;
-  font-size:10px;
-  text-shadow:0 1px 5px #000;
-}
-
-/* icons */
-
-.messages{
-  background:linear-gradient(#75d66d,#42b94d);
-}
-
-.photos{
-  background:linear-gradient(135deg,#ff6b9d,#ffd56a,#6fc8ff);
-}
-
-.notes{
-  background:#f4e9a8;
-  color:#292929;
-}
-
-.music{
-  background:linear-gradient(135deg,#9b5de5,#f15bb5);
-}
-
-.calendar{
-  background:#eee;
-  color:#222;
-}
-
-.heartapp{
-  background:#19191d;
-  border:1px solid rgba(255,255,255,.25);
-}
-
-.camera{
-  background:#34343a;
-}
-
-.secretapp{
-  background:#111;
-  border:1px solid #555;
-}
-
-/* dock */
-
-.dock{
-  position:absolute;
-  bottom:24px;
-  left:5%;
-  right:5%;
-  height:76px;
-  border-radius:24px;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(25px);
-  display:flex;
-  justify-content:space-around;
   align-items:center;
 }
 
-.dock .icon{
-  width:52px;
-  height:52px;
-}
-
-/* =========================
-   APP WINDOW
-========================= */
-
-.app-window{
-  position:absolute;
-  inset:0;
-  z-index:50;
-  background:#0c0c0e;
-  display:none;
-  animation:openApp .3s ease;
-}
-
-.app-window.show{
+.ticket-city small{
   display:block;
+  font-size:8px;
+  letter-spacing:2px;
+  opacity:.5;
+  margin-bottom:5px;
 }
 
-@keyframes openApp{
-  from{
-    opacity:0;
-    transform:scale(.94);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+.ticket-city strong{
+  font-size:18px;
 }
 
-.app-header{
-  height:90px;
-  padding:52px 20px 0;
-  display:flex;
-  align-items:center;
-  gap:14px;
+.arrow{
+  opacity:.3;
 }
 
-.back{
-  background:none;
-  font-size:27px;
-  color:#e7a7ad;
+.ticket-bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:15px;
+  padding:20px 28px;
 }
 
-.app-header h2{
-  font-size:22px;
+.ticket-info small{
+  display:block;
+  font-size:8px;
+  letter-spacing:2px;
+  opacity:.5;
+  margin-bottom:5px;
+}
+
+.ticket-info span{
+  font-size:11px;
   font-weight:600;
 }
 
-.app-content{
-  height:calc(100% - 90px);
-  overflow:auto;
-  padding:20px;
+.enter{
+  width:calc(100% - 56px);
+  margin:0 28px 28px;
+  padding:14px;
+  border:0;
+  background:#111;
+  color:white;
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  cursor:pointer;
 }
+
 
 /* =========================
-   MESSAGES APP
+   MAIN
 ========================= */
 
-.chat-date{
+main{
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+main.show{
+  opacity:1;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:100svh;
+  align-items:center;
   text-align:center;
-  color:#777;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(125,49,64,.3),transparent 40%),
+    #09090b;
+}
+
+.hero-content{
+  max-width:500px;
+  z-index:2;
+}
+
+.hero-title{
+  font-size:clamp(55px,15vw,95px);
+  line-height:.86;
+  letter-spacing:-3px;
+  margin-bottom:28px;
+}
+
+.hero-title em{
+  color:#b87982;
+}
+
+.hero-copy{
+  max-width:340px;
+  margin:auto;
+}
+
+.scroll{
+  position:absolute;
+  bottom:30px;
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  opacity:.35;
+}
+
+
+/* =========================
+   MOVIE INFO
+========================= */
+
+.movie-info{
+  background:#0d0d0f;
+}
+
+.movie-card{
+  max-width:500px;
+  border:1px solid rgba(255,255,255,.1);
+  padding:25px;
+  margin-top:30px;
+}
+
+.movie-line{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
   font-size:11px;
-  margin:8px 0 20px;
 }
 
-.bubble{
-  max-width:78%;
-  padding:10px 14px;
-  border-radius:18px;
-  margin-bottom:8px;
-  font-size:14px;
-  line-height:1.45;
+.movie-line:last-child{
+  border:0;
 }
 
-.bubble.left{
-  background:#26262b;
-  color:#eee;
+.movie-line span:first-child{
+  opacity:.4;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-.bubble.right{
-  margin-left:auto;
-  background:#d9959e;
-  color:#171217;
+
+/* =========================
+   AIRPLANE TRAVEL SCENE
+========================= */
+
+.travel{
+  padding:0;
+  min-height:100svh;
+  overflow:hidden;
+  background:#080b12;
 }
 
-.typing{
+.sky{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  background:
+    linear-gradient(
+      180deg,
+      #080d19 0%,
+      #111d31 48%,
+      #19283a 72%,
+      #070a0e 100%
+    );
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+  opacity:.45;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px);
+  background-size:65px 65px;
+}
+
+.moon{
+  position:absolute;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  right:13%;
+  top:13%;
+  background:#eee9dc;
+  box-shadow:
+    0 0 45px rgba(238,233,220,.16);
+}
+
+.cloud{
+  position:absolute;
+  width:170px;
+  height:35px;
+  border-radius:50px;
+  background:rgba(255,255,255,.08);
+  animation:cloudMove 15s linear infinite;
+}
+
+.cloud:before,
+.cloud:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  background:inherit;
+}
+
+.cloud:before{
+  width:65px;
+  height:65px;
+  left:25px;
+  bottom:0;
+}
+
+.cloud:after{
+  width:48px;
+  height:48px;
+  right:25px;
+  bottom:0;
+}
+
+.cloud.one{
+  top:27%;
+  left:-200px;
+}
+
+.cloud.two{
+  top:60%;
+  left:-350px;
+  animation-delay:5s;
+  opacity:.6;
+}
+
+.cloud.three{
+  top:43%;
+  left:-300px;
+  animation-delay:9s;
+  opacity:.4;
+}
+
+
+/* ROUTE */
+
+.route{
+  position:absolute;
+  left:10%;
+  right:10%;
+  top:50%;
+  height:100px;
+  border-top:2px dashed rgba(255,255,255,.22);
+  transform:rotate(-7deg);
+  transform-origin:left center;
+}
+
+.route:before,
+.route:after{
+  content:"";
+  position:absolute;
+  top:-6px;
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#b87982;
+}
+
+.route:before{
+  left:0;
+}
+
+.route:after{
+  right:0;
+}
+
+.location{
+  position:absolute;
+  top:55%;
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.45);
+}
+
+.location.from{
+  left:6%;
+}
+
+.location.to{
+  right:4%;
+}
+
+
+/* AIRPLANE */
+
+.plane{
+  position:absolute;
+  left:7%;
+  top:43%;
+  z-index:10;
+  font-size:38px;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));
+  animation:flyPlane 7s cubic-bezier(.2,.7,.25,1) forwards;
+}
+
+.plane-trail{
+  position:absolute;
+  left:7%;
+  top:49%;
+  width:0;
+  height:1px;
+  background:rgba(255,255,255,.35);
+  animation:trail 7s ease-out forwards;
+}
+
+
+/* TRAVEL TEXT */
+
+.travel-content{
+  position:absolute;
+  left:22px;
+  right:22px;
+  top:55px;
+  z-index:20;
+}
+
+.travel-title{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  line-height:1;
+}
+
+.travel-status{
+  margin-top:8px;
+  color:rgba(255,255,255,.45);
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+
+/* FLIGHT HUD */
+
+.flight-hud{
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:28px;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+}
+
+.hud-label{
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+}
+
+.hud-value{
+  margin-top:5px;
+  font-size:16px;
+}
+
+.flight-time{
+  font-size:10px;
+  color:rgba(255,255,255,.4);
+}
+
+
+/* ARRIVAL */
+
+.arrival{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  background:#eee8dc;
+  color:#151313;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
+}
+
+.travel.arrived .arrival{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.arrival-inner{
+  max-width:500px;
+}
+
+.arrival small{
+  font-size:8px;
+  letter-spacing:4px;
+  text-transform:uppercase;
   color:#777;
-  font-size:11px;
-  margin:15px 0;
 }
+
+.arrival h2{
+  color:#171414;
+  margin:16px 0 20px;
+  font-size:48px;
+}
+
+.arrival p{
+  color:#625d56;
+  max-width:420px;
+  margin:auto;
+}
+
+.arrival-stamp{
+  display:inline-block;
+  border:1px solid #aaa093;
+  padding:12px 20px;
+  margin-top:30px;
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.restart-flight{
+  display:block;
+  margin:20px auto 0;
+  border:1px solid #777;
+  background:none;
+  padding:12px 18px;
+  font-size:8px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+
+/* =========================
+   CHAPTERS
+========================= */
+
+.chapter{
+  background:#09090b;
+}
+
+.chapter-number{
+  font-size:9px;
+  letter-spacing:4px;
+  color:#a56c75;
+  margin-bottom:15px;
+}
+
+.chapter h2{
+  margin-bottom:25px;
+}
+
+.chapter p{
+  max-width:470px;
+}
+
 
 /* =========================
    PHOTOS
 ========================= */
 
+.photos{
+  background:#0c0c0e;
+}
+
 .photo-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:8px;
+  gap:9px;
+  margin-top:35px;
 }
 
-.photo-grid img{
+.photo{
+  height:230px;
+  overflow:hidden;
+  background:#151515;
+  cursor:pointer;
+}
+
+.photo img{
   width:100%;
-  aspect-ratio:1;
+  height:100%;
   object-fit:cover;
-  border-radius:10px;
+  transition:transform .7s ease;
 }
 
-.photo-caption{
-  color:#777;
-  font-size:12px;
-  text-align:center;
-  margin:20px 0;
+.photo:hover img{
+  transform:scale(1.06);
 }
+
 
 /* =========================
-   NOTES
+   VIEWER
 ========================= */
 
-.note{
-  background:#f1e7a5;
-  color:#272321;
-  border-radius:5px;
-  padding:24px;
-  min-height:400px;
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
+.viewer{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:rgba(0,0,0,.96);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
-.note h3{
-  font-family:Georgia,serif;
+.viewer.show{
+  display:flex;
+}
+
+.viewer img{
+  max-width:100%;
+  max-height:82vh;
+  object-fit:contain;
+}
+
+.close-viewer{
+  position:absolute;
+  right:25px;
+  top:20px;
+  border:0;
+  background:none;
+  color:white;
+  font-size:28px;
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
+.letter{
+  background:#eee8dc;
+  color:#161414;
+}
+
+.letter .eyebrow{
+  color:#555;
+}
+
+.letter h2{
+  color:#161414;
+}
+
+.letter p{
+  color:#5d5851;
+  margin-top:25px;
+  max-width:500px;
+}
+
+.signature{
+  margin-top:35px;
+  font-family:"Playfair Display",serif;
   font-size:22px;
-  margin-bottom:20px;
+  font-style:italic;
 }
 
-.note p{
-  font-family:Georgia,serif;
-  font-size:16px;
-  line-height:1.8;
-  margin-bottom:15px;
+
+/* =========================
+   FILM STRIP
+========================= */
+
+.strip{
+  background:#09090b;
 }
+
+.strip-wrap{
+  display:flex;
+  overflow-x:auto;
+  gap:8px;
+  margin-top:35px;
+  padding-bottom:15px;
+  scrollbar-width:none;
+}
+
+.strip-wrap::-webkit-scrollbar{
+  display:none;
+}
+
+.frame{
+  flex:0 0 190px;
+  height:270px;
+  padding:9px;
+  background:#151515;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
 
 /* =========================
    MUSIC
 ========================= */
 
-.music-screen{
+.music{
   text-align:center;
-  padding-top:25px;
+  align-items:center;
+  background:
+    radial-gradient(circle,rgba(137,62,75,.18),transparent 45%),
+    #090909;
 }
 
-.album-art{
+.album{
   width:210px;
   height:210px;
-  margin:auto;
-  border-radius:12px;
-  background:
-    url("att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg")
-    center/cover;
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  margin:30px auto;
+  overflow:hidden;
 }
 
-.music-screen h3{
-  margin-top:25px;
-  font-size:20px;
+.album img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-.music-screen p{
-  color:#888;
+.music-title{
+  font-family:"Playfair Display",serif;
+  font-size:25px;
+}
+
+.music-sub{
+  font-size:10px;
+  opacity:.4;
   margin-top:5px;
-  font-size:13px;
 }
 
-.play{
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:white;
-  color:#111;
-  font-size:22px;
-  margin-top:28px;
-}
-
-/* =========================
-   CALENDAR
-========================= */
-
-.calendar-card{
-  background:#18181c;
-  border-radius:15px;
-  padding:20px;
-}
-
-.calendar-title{
-  font-size:28px;
-  margin-bottom:18px;
-}
-
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-  text-align:center;
-}
-
-.calendar-grid span{
-  font-size:11px;
-  color:#777;
-}
-
-.day{
-  padding:8px 0;
-  font-size:12px;
-}
-
-.special{
-  background:#d9959e;
-  color:#151015;
-  border-radius:50%;
-}
-
-/* =========================
-   HEART APP
-========================= */
-
-.heart-screen{
-  text-align:center;
-  padding-top:50px;
-}
-
-.big-heart{
-  font-size:90px;
-  animation:heartbeat 1.5s infinite;
-}
-
-@keyframes heartbeat{
-  0%,100%{transform:scale(1)}
-  15%{transform:scale(1.12)}
-  30%{transform:scale(1)}
-}
-
-.heart-screen h2{
-  font-family:Georgia,serif;
-  font-weight:400;
-  font-size:30px;
+.music-btn{
+  width:55px;
+  height:55px;
   margin-top:25px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);
+  background:none;
+  color:white;
 }
 
-.heart-screen p{
-  color:#888;
-  margin-top:15px;
-  line-height:1.7;
-}
-
-/* =========================
-   SECRET APP
-========================= */
-
-.secret-screen{
-  text-align:center;
-  padding-top:60px;
-}
-
-.lock-icon{
-  font-size:55px;
-  margin-bottom:20px;
-}
-
-.secret-screen h2{
-  font-family:Georgia,serif;
-  font-weight:400;
-}
-
-.secret-screen p{
-  color:#777;
-  margin-top:10px;
-  font-size:13px;
-  line-height:1.6;
-}
-
-.secret-btn{
-  margin-top:30px;
-  padding:14px 25px;
-  border-radius:25px;
-  background:#e8a7ad;
-  color:#161116;
-}
 
 /* =========================
    FINAL
 ========================= */
 
-#ending{
-  position:absolute;
-  inset:0;
-  z-index:300;
-  background:#050506;
-  display:none;
-  align-items:center;
-  justify-content:center;
+.final{
   text-align:center;
-  padding:30px;
+  align-items:center;
+  background:
+    radial-gradient(circle,rgba(129,48,63,.28),transparent 55%),
+    #080808;
 }
 
-#ending.show{
+.final h2{
+  font-size:clamp(45px,12vw,75px);
+  max-width:650px;
+}
+
+.final p{
+  max-width:370px;
+  margin-top:25px;
+}
+
+.final-ticket{
+  margin-top:45px;
+  padding:14px 22px;
+  border:1px solid rgba(255,255,255,.15);
+  color:#b87982;
+  font-size:8px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+
+/* =========================
+   PLAYER
+========================= */
+
+.player{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  z-index:100;
+  width:calc(100% - 35px);
+  max-width:420px;
+  padding:12px 16px;
   display:flex;
-}
-
-.ending-content{
-  max-width:360px;
-}
-
-.ending-photo{
-  width:160px;
-  height:205px;
-  object-fit:cover;
-  border-radius:4px;
+  align-items:center;
+  gap:12px;
+  background:rgba(15,15,15,.88);
+  backdrop-filter:blur(15px);
+  border:1px solid rgba(255,255,255,.1);
   opacity:0;
-  transform:scale(.9);
-  animation:reveal 2s 1s forwards;
+  pointer-events:none;
+  transition:.5s;
 }
 
-.ending-text{
-  margin-top:30px;
-  font-family:Georgia,serif;
-  font-size:25px;
-  line-height:1.5;
-  opacity:0;
-  animation:fadeUp 1.5s 2.5s forwards;
+.player.show{
+  opacity:1;
+  pointer-events:auto;
 }
 
-.ending-small{
-  margin-top:20px;
-  color:#777;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+.player button{
+  border:0;
+  background:none;
+  color:white;
+}
+
+.player-info{
+  flex:1;
+}
+
+.player-info strong{
+  display:block;
   font-size:11px;
-  letter-spacing:2px;
-  opacity:0;
-  animation:fadeUp 1.5s 3.5s forwards;
+  font-weight:500;
 }
 
-@keyframes reveal{
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+.player-info span{
+  display:block;
+  font-size:8px;
+  opacity:.4;
 }
 
-@keyframes fadeUp{
-  to{
-    opacity:1;
-    transform:translateY(0);
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes flyPlane{
+
+  0%{
+    left:7%;
+    top:43%;
+    transform:rotate(-7deg);
   }
+
+  30%{
+    left:32%;
+    top:35%;
+    transform:rotate(-3deg);
+  }
+
+  60%{
+    left:60%;
+    top:39%;
+    transform:rotate(3deg);
+  }
+
+  100%{
+    left:88%;
+    top:54%;
+    transform:rotate(8deg);
+  }
+
+}
+
+@keyframes trail{
+
+  0%{
+    width:0;
+  }
+
+  100%{
+    width:80%;
+  }
+
+}
+
+@keyframes cloudMove{
+
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(1000px);
+  }
+
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+
+  section{
+    padding-left:10%;
+    padding-right:10%;
+  }
+
+  .photo-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .photo{
+    height:350px;
+  }
+
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div class="phone">
 
 <!-- =========================
-     LOCK SCREEN
+     INTRO
 ========================= -->
 
-<section id="lock">
+<div class="intro" id="intro">
 
-  <div class="lock-date" id="date"></div>
-  <div class="lock-time" id="time">11:11</div>
+  <div class="ticket">
 
-  <div class="lock-location">
-    ♡ for babyyy
-  </div>
+    <div class="ticket-top">
 
-  <div class="lock-bottom">
+      <div class="ticket-label">
+        A private screening
+      </div>
 
-    <div class="face" onclick="showPasscode()">
-      ♡
+      <div class="ticket-title">
+        One Ticket<br>
+        For Two
+      </div>
+
+      <div class="ticket-route">
+
+        <div class="ticket-city">
+          <small>FROM</small>
+          <strong>ME</strong>
+        </div>
+
+        <div class="arrow">
+          →
+        </div>
+
+        <div class="ticket-city">
+          <small>TO</small>
+          <strong>YOU</strong>
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="swipe">
-      tap to unlock
+
+    <div class="ticket-bottom">
+
+      <div class="ticket-info">
+        <small>DATE</small>
+        <span>04.09.26</span>
+      </div>
+
+      <div class="ticket-info">
+        <small>SEATS</small>
+        <span>02 / 02</span>
+      </div>
+
+      <div class="ticket-info">
+        <small>CLASS</small>
+        <span>FOREVER</span>
+      </div>
+
+    </div>
+
+
+    <button class="enter" onclick="enterMovie()">
+      Enter The Movie
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<main id="main">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      A movie about us
+    </div>
+
+    <h1 class="hero-title">
+      One Ticket<br>
+      <em>For Two.</em>
+    </h1>
+
+    <p class="hero-copy">
+      If our story were a movie,
+      I wouldn't want to watch it alone.
+    </p>
+
+  </div>
+
+  <div class="scroll">
+    Scroll to begin
+  </div>
+
+</section>
+
+
+
+<!-- MOVIE INFO -->
+
+<section class="movie-info">
+
+  <div class="eyebrow">
+    The film
+  </div>
+
+  <h2>
+    Some stories<br>
+    deserve a screen.
+  </h2>
+
+  <div class="movie-card">
+
+    <div class="movie-line">
+      <span>Title</span>
+      <span>One Ticket For Two</span>
+    </div>
+
+    <div class="movie-line">
+      <span>Genre</span>
+      <span>Love / Life</span>
+    </div>
+
+    <div class="movie-line">
+      <span>Starring</span>
+      <span>You & Me</span>
+    </div>
+
+    <div class="movie-line">
+      <span>Runtime</span>
+      <span>Still Going</span>
+    </div>
+
+    <div class="movie-line">
+      <span>Ending</span>
+      <span>Not Written Yet</span>
     </div>
 
   </div>
@@ -709,801 +1087,672 @@ button{
 </section>
 
 
+
 <!-- =========================
-     PASSCODE
+     AIRPLANE TRAVEL
 ========================= -->
 
-<section id="passcode">
+<section class="travel" id="travel">
 
-  <div class="pass-title">
-    Enter Passcode
-  </div>
+  <div class="sky">
 
-  <div class="pass-sub">
-    hint: the day everything started
-  </div>
+    <div class="stars"></div>
 
-  <div class="dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
+    <div class="moon"></div>
 
-  <div class="keypad">
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+    <div class="cloud three"></div>
 
-    <button class="key" onclick="press(1)">1</button>
-    <button class="key" onclick="press(2)">2 ABC</button>
-    <button class="key" onclick="press(3)">3 DEF</button>
+    <div class="route"></div>
 
-    <button class="key" onclick="press(4)">4 GHI</button>
-    <button class="key" onclick="press(5)">5 JKL</button>
-    <button class="key" onclick="press(6)">6 MNO</button>
+    <div class="location from">
+      DEPARTURE
+    </div>
 
-    <button class="key" onclick="press(7)">7 PQRS</button>
-    <button class="key" onclick="press(8)">8 TUV</button>
-    <button class="key" onclick="press(9)">9 WXYZ</button>
+    <div class="location to">
+      ARRIVAL
+    </div>
 
-    <button class="key" onclick="press(0)">0</button>
+    <div class="plane">
+      ✈
+    </div>
+
+    <div class="plane-trail"></div>
 
   </div>
 
-  <button class="cancel" onclick="hidePasscode()">
-    Cancel
+
+  <div class="travel-content">
+
+    <div class="eyebrow">
+      Scene 03 · Departure
+    </div>
+
+    <div class="travel-title">
+      Let's go somewhere
+      together.
+    </div>
+
+    <div class="travel-status" id="travelStatus">
+      Preparing for departure
+    </div>
+
+  </div>
+
+
+  <div class="flight-hud">
+
+    <div>
+
+      <div class="hud-label">
+        Flight
+      </div>
+
+      <div class="hud-value">
+        J × B 0904
+      </div>
+
+    </div>
+
+
+    <div style="text-align:right">
+
+      <div class="hud-label">
+        Status
+      </div>
+
+      <div class="flight-time" id="flightStatus">
+        Boarding
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ARRIVAL -->
+
+  <div class="arrival">
+
+    <div class="arrival-inner">
+
+      <small>
+        We've arrived
+      </small>
+
+      <h2>
+        Wherever we go,
+        I want you there.
+      </h2>
+
+      <p>
+        The destination was never the most
+        important part of the trip.
+        It was having someone beside me
+        while getting there.
+      </p>
+
+      <div class="arrival-stamp">
+        Destination · Us
+      </div>
+
+      <button class="restart-flight" onclick="restartFlight()">
+        Take The Flight Again
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- CHAPTER 04 -->
+
+<section class="chapter">
+
+  <div class="chapter-number">
+    Chapter 04
+  </div>
+
+  <h2>
+    The best part<br>
+    wasn't the destination.
+  </h2>
+
+  <p>
+    It was knowing that somewhere along
+    the way, I had someone beside me.
+    Someone I wanted to share the view with.
+  </p>
+
+</section>
+
+
+
+<!-- PHOTOS -->
+
+<section class="photos">
+
+  <div class="eyebrow">
+    Movie stills
+  </div>
+
+  <h2>
+    My favorite scenes
+    are the ones with you.
+  </h2>
+
+
+  <div class="photo-grid">
+
+    <div class="photo">
+      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
+    </div>
+
+    <div class="photo">
+      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- LETTER -->
+
+<section class="letter">
+
+  <div>
+
+    <div class="eyebrow">
+      Between takes
+    </div>
+
+    <h2>
+      There are things
+      I don't always say.
+    </h2>
+
+    <p>
+      I don't know what the future is going
+      to look like. I don't know every place
+      we'll go, every problem we'll face,
+      or every chapter waiting for us.
+    </p>
+
+    <p>
+      But if I get to choose my favorite
+      person to experience those moments
+      with, I'd choose you.
+    </p>
+
+    <p>
+      Because I don't need a perfect movie.
+      I just want a real story with you.
+    </p>
+
+    <div class="signature">
+      — me, always choosing you
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- FILM STRIP -->
+
+<section class="strip">
+
+  <div class="eyebrow">
+    Roll the film
+  </div>
+
+  <h2>
+    A few frames<br>
+    I'd keep forever.
+  </h2>
+
+
+  <div class="strip-wrap">
+
+    <div class="frame">
+      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
+    </div>
+
+    <div class="frame">
+      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- MUSIC -->
+
+<section class="music">
+
+  <div class="eyebrow">
+    Original soundtrack
+  </div>
+
+  <div class="album">
+
+    <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
+
+  </div>
+
+  <div class="music-title">
+    Paraluman
+  </div>
+
+  <div class="music-sub">
+    Adie · Our soundtrack
+  </div>
+
+  <button
+    class="music-btn"
+    id="musicBtn"
+    onclick="toggleMusic()">
+    ▶
   </button>
 
-</section>
+  <audio id="audio" loop>
 
+    <source
+      src="Adie - Paraluman (Lyrics).mp3"
+      type="audio/mpeg">
 
-<!-- =========================
-     HOME SCREEN
-========================= -->
-
-<section id="home">
-
-  <div class="status">
-    <span id="homeTime">11:11</span>
-    <span>● ● ●  ▰</span>
-  </div>
-
-  <div class="apps">
-
-    <div class="app" onclick="openApp('messages')">
-      <div class="icon messages">●</div>
-      <div class="app-name">Messages</div>
-    </div>
-
-    <div class="app" onclick="openApp('photos')">
-      <div class="icon photos">✿</div>
-      <div class="app-name">Photos</div>
-    </div>
-
-    <div class="app" onclick="openApp('notes')">
-      <div class="icon notes">☰</div>
-      <div class="app-name">Notes</div>
-    </div>
-
-    <div class="app" onclick="openApp('music')">
-      <div class="icon music">♪</div>
-      <div class="app-name">Music</div>
-    </div>
-
-    <div class="app" onclick="openApp('calendar')">
-      <div class="icon calendar">17</div>
-      <div class="app-name">Calendar</div>
-    </div>
-
-    <div class="app" onclick="openApp('heart')">
-      <div class="icon heartapp">♡</div>
-      <div class="app-name">For You</div>
-    </div>
-
-    <div class="app" onclick="openApp('camera')">
-      <div class="icon camera">⌾</div>
-      <div class="app-name">Camera</div>
-    </div>
-
-    <div class="app" onclick="openApp('secret')">
-      <div class="icon secretapp">?</div>
-      <div class="app-name">Unknown</div>
-    </div>
-
-  </div>
-
-
-  <div class="dock">
-
-    <div class="icon messages" onclick="openApp('messages')">
-      ●
-    </div>
-
-    <div class="icon photos" onclick="openApp('photos')">
-      ✿
-    </div>
-
-    <div class="icon music" onclick="openApp('music')">
-      ♪
-    </div>
-
-    <div class="icon heartapp" onclick="openApp('heart')">
-      ♡
-    </div>
-
-  </div>
+  </audio>
 
 </section>
 
 
-<!-- =========================
-     APP WINDOWS
-========================= -->
 
-<section class="app-window" id="messages">
+<!-- FINAL -->
 
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Messages</h2>
+<section class="final">
+
+  <div class="eyebrow">
+    End credits
   </div>
 
-  <div class="app-content">
+  <h2>
+    The movie isn't over.
+  </h2>
 
-    <div class="chat-date">
-      today
-    </div>
+  <p>
+    We just haven't filmed
+    the best parts yet.
+  </p>
 
-    <div class="bubble left">
-      babyyy
-    </div>
-
-    <div class="bubble right">
-      hmm? what's up?
-    </div>
-
-    <div class="bubble left">
-      wala lang
-    </div>
-
-    <div class="bubble right">
-      you just wanted my attention 😭
-    </div>
-
-    <div class="bubble left">
-      maybeee
-    </div>
-
-    <div class="bubble right">
-      come here then.
-    </div>
-
-    <div class="bubble left">
-      HAHAHAHA
-    </div>
-
-    <div class="bubble right">
-      see? that's my favorite sound.
-    </div>
-
-    <div class="typing">
-      i love you more than i usually say.
-    </div>
-
+  <div class="final-ticket">
+    Admit two · No expiration
   </div>
 
 </section>
 
-
-<section class="app-window" id="photos">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Photos</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div class="photo-grid">
-
-      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-
-      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
-
-      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
-
-      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
-
-      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
-
-      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
-
-      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
-
-    </div>
-
-    <div class="photo-caption">
-      7 photos I couldn't stop looking at.
-    </div>
-
-  </div>
-
-</section>
+</main>
 
 
-<section class="app-window" id="notes">
 
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Notes</h2>
-  </div>
+<!-- PHOTO VIEWER -->
 
-  <div class="app-content">
+<div class="viewer" id="viewer">
 
-    <div class="note">
+  <button
+    class="close-viewer"
+    onclick="closeViewer()">
+    ×
+  </button>
 
-      <h3>for babyyy ♡</h3>
+  <img id="viewerImg">
 
-      <p>
-        I don't always know how to explain
-        what you mean to me.
-      </p>
+</div>
 
-      <p>
-        Sometimes I joke around.
-        Sometimes I annoy you.
-        Sometimes I don't say much.
-      </p>
 
-      <p>
-        But none of that changes the fact
-        that I genuinely care about you.
-      </p>
 
-      <p>
-        If you ever feel like you're not enough,
-        I hope you remember that someone out here
-        sees you differently.
-      </p>
+<!-- MINI MUSIC PLAYER -->
 
-      <p>
-        You are someone I want to keep.
-      </p>
+<div class="player" id="player">
 
-      <p>
-        — j
-      </p>
+  <button
+    id="playerBtn"
+    onclick="toggleMusic()">
+    ▶
+  </button>
 
-    </div>
+  <div class="player-info">
+
+    <strong>
+      Paraluman
+    </strong>
+
+    <span>
+      Adie
+    </span>
 
   </div>
 
-</section>
+</div>
 
-
-<section class="app-window" id="music">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Music</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div class="music-screen">
-
-      <div class="album-art"></div>
-
-      <h3>Paraluman</h3>
-
-      <p>Adie</p>
-
-      <button class="play" onclick="toggleMusic()">
-        <span id="playIcon">▶</span>
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="app-window" id="calendar">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Calendar</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div class="calendar-card">
-
-      <div class="calendar-title">
-        September 2026
-      </div>
-
-      <div class="calendar-grid">
-
-        <span>S</span>
-        <span>M</span>
-        <span>T</span>
-        <span>W</span>
-        <span>T</span>
-        <span>F</span>
-        <span>S</span>
-
-        <span></span>
-        <span></span>
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span class="day special">4</span>
-        <span>5</span>
-
-        <span>6</span>
-        <span>7</span>
-        <span>8</span>
-        <span>9</span>
-        <span>10</span>
-        <span>11</span>
-        <span>12</span>
-
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-        <span>16</span>
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-
-        <span>20</span>
-        <span>21</span>
-        <span>22</span>
-        <span>23</span>
-        <span>24</span>
-        <span>25</span>
-        <span>26</span>
-
-        <span>27</span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="app-window" id="heart">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>For You</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div class="heart-screen">
-
-      <div class="big-heart">
-        ♡
-      </div>
-
-      <h2>
-        you.
-      </h2>
-
-      <p>
-        Out of all the people I could have met,
-        I'm glad it was you.
-      </p>
-
-      <p>
-        And if I had to choose again,
-        I'd still choose you.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="app-window" id="camera">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Camera</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div style="
-      height:70vh;
-      border-radius:20px;
-      background:
-      url('att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg')
-      center/cover;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding-bottom:30px;
-    ">
-
-      <div style="
-        background:rgba(0,0,0,.55);
-        padding:12px 20px;
-        border-radius:20px;
-        font-size:12px;
-      ">
-        my favorite view
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="app-window" id="secret">
-
-  <div class="app-header">
-    <button class="back" onclick="closeApp()">‹</button>
-    <h2>Unknown</h2>
-  </div>
-
-  <div class="app-content">
-
-    <div class="secret-screen">
-
-      <div class="lock-icon">
-        🔒
-      </div>
-
-      <h2>
-        You found something.
-      </h2>
-
-      <p>
-        This app wasn't supposed to be visible.
-        <br>
-        But since you're already here...
-      </p>
-
-      <button
-        class="secret-btn"
-        onclick="showEnding()"
-      >
-        OPEN
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     ENDING
-========================= -->
-
-<section id="ending">
-
-  <div class="ending-content">
-
-    <img
-      class="ending-photo"
-      src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg"
-    >
-
-    <div class="ending-text">
-
-      I could make a thousand
-      little things for you...
-
-    </div>
-
-    <div class="ending-small">
-
-      BUT I'D STILL RATHER JUST HAVE YOU
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<audio
-  id="song"
-  src="Adie - Paraluman (Lyrics).mp3"
-  preload="auto"
-></audio>
 
 
 <script>
 
 /* =========================
-   CLOCK
+   INTRO
 ========================= */
 
-function updateClock(){
+const intro =
+document.getElementById("intro");
 
-  const now = new Date();
+const main =
+document.getElementById("main");
 
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
+const audio =
+document.getElementById("audio");
 
-  const ampm = hours >= 12 ? "PM" : "AM";
+const musicBtn =
+document.getElementById("musicBtn");
 
-  hours = hours % 12;
-  hours = hours || 12;
+const playerBtn =
+document.getElementById("playerBtn");
 
-  minutes =
-    minutes < 10
-    ? "0" + minutes
-    : minutes;
-
-  document.getElementById("time")
-    .textContent =
-    hours + ":" + minutes;
-
-  document.getElementById("homeTime")
-    .textContent =
-    hours + ":" + minutes;
-
-  document.getElementById("date")
-    .textContent =
-    now.toLocaleDateString(
-      "en-US",
-      {
-        weekday:"long",
-        month:"long",
-        day:"numeric"
-      }
-    );
-
-}
-
-updateClock();
-setInterval(updateClock,1000);
+const player =
+document.getElementById("player");
 
 
-/* =========================
-   PASSCODE
-========================= */
+function enterMovie(){
 
-let code = "";
+  intro.classList.add("hide");
 
-const correctCode = "09042026";
+  setTimeout(function(){
 
-function showPasscode(){
+    main.classList.add("show");
 
-  document
-    .getElementById("passcode")
-    .classList.add("show");
+    player.classList.add("show");
 
-}
+  },500);
 
-function hidePasscode(){
+  audio.play().then(function(){
 
-  document
-    .getElementById("passcode")
-    .classList.remove("show");
+    musicBtn.textContent="❚❚";
+    playerBtn.textContent="❚❚";
 
-  code = "";
+  }).catch(function(){
 
-  updateDots();
-
-}
-
-function press(number){
-
-  if(code.length >= 8) return;
-
-  code += number;
-
-  updateDots();
-
-  if(code.length === 8){
-
-    setTimeout(()=>{
-
-      if(code === correctCode){
-
-        unlockPhone();
-
-      }else{
-
-        code = "";
-
-        updateDots();
-
-        if(navigator.vibrate){
-          navigator.vibrate(300);
-        }
-
-      }
-
-    },200);
-
-  }
-
-}
-
-function updateDots(){
-
-  const dots =
-    document.querySelectorAll(".dot");
-
-  dots.forEach((dot,index)=>{
-
-    dot.classList.toggle(
-      "active",
-      index < code.length
-    );
+    musicBtn.textContent="▶";
+    playerBtn.textContent="▶";
 
   });
 
 }
 
 
-/* =========================
-   UNLOCK
-========================= */
-
-function unlockPhone(){
-
-  document
-    .getElementById("passcode")
-    .classList.remove("show");
-
-  document
-    .getElementById("lock")
-    .classList.add("unlocking");
-
-  setTimeout(()=>{
-
-    document
-      .getElementById("home")
-      .classList.add("show");
-
-  },500);
-
-}
-
-
-/* =========================
-   APPS
-========================= */
-
-function openApp(name){
-
-  document
-    .querySelectorAll(".app-window")
-    .forEach(app=>{
-      app.classList.remove("show");
-    });
-
-  const app =
-    document.getElementById(name);
-
-  if(app){
-    app.classList.add("show");
-  }
-
-}
-
-function closeApp(){
-
-  document
-    .querySelectorAll(".app-window")
-    .forEach(app=>{
-      app.classList.remove("show");
-    });
-
-}
-
 
 /* =========================
    MUSIC
 ========================= */
 
-const song =
-  document.getElementById("song");
-
 function toggleMusic(){
 
-  const icon =
-    document.getElementById("playIcon");
+  if(audio.paused){
 
-  if(song.paused){
+    audio.play();
 
-    song.play()
-      .then(()=>{
-        icon.textContent = "Ⅱ";
-      })
-      .catch(()=>{
-        icon.textContent = "▶";
-      });
+    musicBtn.textContent="❚❚";
+    playerBtn.textContent="❚❚";
 
   }else{
 
-    song.pause();
+    audio.pause();
 
-    icon.textContent = "▶";
+    musicBtn.textContent="▶";
+    playerBtn.textContent="▶";
 
   }
 
 }
 
-song.addEventListener(
-  "ended",
-  ()=>{
-    document
-      .getElementById("playIcon")
-      .textContent = "▶";
-  }
-);
 
 
 /* =========================
-   FINAL
+   AIRPLANE FLIGHT
 ========================= */
 
-function showEnding(){
+const travel =
+document.getElementById("travel");
 
-  document
-    .getElementById("ending")
-    .classList.add("show");
+const travelStatus =
+document.getElementById("travelStatus");
+
+const flightStatus =
+document.getElementById("flightStatus");
+
+
+function startFlight(){
+
+  travel.classList.remove("arrived");
+
+  travelStatus.textContent =
+  "Preparing for departure";
+
+  flightStatus.textContent =
+  "Boarding";
+
+  setTimeout(function(){
+
+    travelStatus.textContent =
+    "We're taking off";
+
+    flightStatus.textContent =
+    "Takeoff";
+
+  },1200);
+
+
+  setTimeout(function(){
+
+    travelStatus.textContent =
+    "Somewhere between here and there";
+
+    flightStatus.textContent =
+    "In flight";
+
+  },2800);
+
+
+  setTimeout(function(){
+
+    travelStatus.textContent =
+    "Almost there";
+
+    flightStatus.textContent =
+    "Landing";
+
+  },5600);
+
+
+  setTimeout(function(){
+
+    travel.classList.add("arrived");
+
+  },7000);
 
 }
 
 
-/* =========================
-   SWIPE BACK
-========================= */
+function restartFlight(){
 
-let startX = 0;
+  travel.classList.remove("arrived");
 
-document.addEventListener(
-  "touchstart",
-  e=>{
-    startX =
-      e.touches[0].clientX;
-  },
-  {passive:true}
-);
+  void travel.offsetWidth;
 
-document.addEventListener(
-  "touchend",
-  e=>{
+  startFlight();
 
-    const endX =
-      e.changedTouches[0].clientX;
+}
 
-    if(
-      startX < 40 &&
-      endX - startX > 80
-    ){
 
-      closeApp();
+
+/* Start when travel section enters */
+
+let flightStarted=false;
+
+const flightObserver =
+new IntersectionObserver(function(entries){
+
+  entries.forEach(function(entry){
+
+    if(entry.isIntersecting && !flightStarted){
+
+      flightStarted=true;
+
+      startFlight();
 
     }
 
-  },
-  {passive:true}
-);
+  });
+
+},{threshold:.35});
+
+
+flightObserver.observe(travel);
+
+
+
+/* =========================
+   PHOTO VIEWER
+========================= */
+
+const photos =
+document.querySelectorAll(".photo img");
+
+const viewer =
+document.getElementById("viewer");
+
+const viewerImg =
+document.getElementById("viewerImg");
+
+
+photos.forEach(function(img){
+
+  img.addEventListener("click",function(){
+
+    viewerImg.src=img.src;
+
+    viewer.classList.add("show");
+
+  });
+
+});
+
+
+function closeViewer(){
+
+  viewer.classList.remove("show");
+
+}
+
+
+viewer.addEventListener("click",function(e){
+
+  if(e.target===viewer){
+
+    closeViewer();
+
+  }
+
+});
+
+
+
+/* =========================
+   SECTION FADE
+========================= */
+
+const observer =
+new IntersectionObserver(function(entries){
+
+  entries.forEach(function(entry){
+
+    if(entry.isIntersecting){
+
+      entry.target.style.opacity="1";
+
+      entry.target.style.transform=
+      "translateY(0)";
+
+    }
+
+  });
+
+},{
+  threshold:.12
+});
+
+
+document.querySelectorAll("section").forEach(function(section){
+
+  section.style.opacity="0";
+
+  section.style.transform=
+  "translateY(25px)";
+
+  section.style.transition=
+  "opacity 1s ease, transform 1s ease";
+
+  observer.observe(section);
+
+});
+
 
 </script>
 
