@@ -3,1756 +3,1311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>One Ticket For Two</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<title>ESCAPE THE SCREEN</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  background:#08090c;
-  color:#f5f1ea;
-  font-family:"DM Sans",sans-serif;
-  overflow-x:hidden;
+    font-family:Inter,Arial,sans-serif;
+    background:#070707;
+    color:#f5f5f5;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-button{
-  font:inherit;
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:35px 35px;
 }
 
-section{
-  position:relative;
-  min-height:100vh;
-  padding:90px 22px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+.app{
+    width:100%;
+    max-width:760px;
+    margin:auto;
+    min-height:100vh;
+    padding:25px 18px 60px;
 }
 
-.eyebrow{
-  font-size:9px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  opacity:.45;
-  margin-bottom:18px;
+.header{
+    border:1px solid #262626;
+    padding:18px;
+    margin-bottom:20px;
+    background:#0c0c0c;
 }
 
-h1,h2{
-  font-family:"Playfair Display",serif;
-  font-weight:500;
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-h2{
-  font-size:43px;
-  line-height:1.05;
+.system{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#777;
 }
 
-p{
-  color:#aaa39a;
-  line-height:1.8;
-  font-size:14px;
+.status{
+    font-size:11px;
+    color:#aaa;
 }
 
-
-/* =========================
-   INTRO TICKET
-========================= */
-
-.intro{
-  position:fixed;
-  inset:0;
-  z-index:1000;
-  background:#08090c;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-  transition:opacity 1s ease,visibility 1s ease;
-}
-
-.intro.hide{
-  opacity:0;
-  visibility:hidden;
-}
-
-.ticket{
-  width:min(390px,100%);
-  background:#eee8dc;
-  color:#111;
-  border-radius:4px;
-  overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.7);
-  transform:rotate(-1deg);
-}
-
-.ticket-top{
-  padding:28px;
-  border-bottom:1px dashed #888;
-}
-
-.ticket-label{
-  font-size:9px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  opacity:.5;
-}
-
-.ticket-title{
-  font-family:"Playfair Display",serif;
-  font-size:40px;
-  line-height:.95;
-  margin:14px 0 25px;
-}
-
-.ticket-route{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.ticket-city small{
-  display:block;
-  font-size:8px;
-  letter-spacing:2px;
-  opacity:.5;
-  margin-bottom:5px;
-}
-
-.ticket-city strong{
-  font-size:18px;
-}
-
-.arrow{
-  opacity:.3;
-}
-
-.ticket-bottom{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:15px;
-  padding:20px 28px;
-}
-
-.ticket-info small{
-  display:block;
-  font-size:8px;
-  letter-spacing:2px;
-  opacity:.5;
-  margin-bottom:5px;
-}
-
-.ticket-info span{
-  font-size:11px;
-  font-weight:600;
-}
-
-.enter{
-  width:calc(100% - 56px);
-  margin:0 28px 28px;
-  padding:14px;
-  border:0;
-  background:#111;
-  color:white;
-  font-size:9px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  cursor:pointer;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-  opacity:0;
-  transition:opacity 1s ease;
-}
-
-main.show{
-  opacity:1;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  min-height:100svh;
-  align-items:center;
-  text-align:center;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 20%,rgba(125,49,64,.3),transparent 40%),
-    #09090b;
-}
-
-.hero-content{
-  max-width:500px;
-  z-index:2;
-}
-
-.hero-title{
-  font-size:clamp(55px,15vw,95px);
-  line-height:.86;
-  letter-spacing:-3px;
-  margin-bottom:28px;
-}
-
-.hero-title em{
-  color:#b87982;
-}
-
-.hero-copy{
-  max-width:340px;
-  margin:auto;
-}
-
-.scroll{
-  position:absolute;
-  bottom:30px;
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  opacity:.35;
-}
-
-
-/* =========================
-   MOVIE INFO
-========================= */
-
-.movie-info{
-  background:#0d0d0f;
-}
-
-.movie-card{
-  max-width:500px;
-  border:1px solid rgba(255,255,255,.1);
-  padding:25px;
-  margin-top:30px;
-}
-
-.movie-line{
-  display:flex;
-  justify-content:space-between;
-  padding:15px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  font-size:11px;
-}
-
-.movie-line:last-child{
-  border:0;
-}
-
-.movie-line span:first-child{
-  opacity:.4;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-
-/* =========================
-   AIRPLANE TRAVEL SCENE
-========================= */
-
-.travel{
-  padding:0;
-  min-height:100svh;
-  overflow:hidden;
-  background:#080b12;
-}
-
-.sky{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-  background:
-    linear-gradient(
-      180deg,
-      #080d19 0%,
-      #111d31 48%,
-      #19283a 72%,
-      #070a0e 100%
-    );
-}
-
-.stars{
-  position:absolute;
-  inset:0;
-  opacity:.45;
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px);
-  background-size:65px 65px;
-}
-
-.moon{
-  position:absolute;
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  right:13%;
-  top:13%;
-  background:#eee9dc;
-  box-shadow:
-    0 0 45px rgba(238,233,220,.16);
-}
-
-.cloud{
-  position:absolute;
-  width:170px;
-  height:35px;
-  border-radius:50px;
-  background:rgba(255,255,255,.08);
-  animation:cloudMove 15s linear infinite;
-}
-
-.cloud:before,
-.cloud:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  background:inherit;
-}
-
-.cloud:before{
-  width:65px;
-  height:65px;
-  left:25px;
-  bottom:0;
-}
-
-.cloud:after{
-  width:48px;
-  height:48px;
-  right:25px;
-  bottom:0;
-}
-
-.cloud.one{
-  top:27%;
-  left:-200px;
+h1{
+    font-size:clamp(30px,8vw,58px);
+    line-height:.95;
+    margin-top:18px;
+    letter-spacing:-3px;
 }
 
-.cloud.two{
-  top:60%;
-  left:-350px;
-  animation-delay:5s;
-  opacity:.6;
+.subtitle{
+    margin-top:12px;
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
 }
 
-.cloud.three{
-  top:43%;
-  left:-300px;
-  animation-delay:9s;
-  opacity:.4;
+.progress-wrap{
+    margin-top:20px;
 }
 
-
-/* ROUTE */
-
-.route{
-  position:absolute;
-  left:10%;
-  right:10%;
-  top:50%;
-  height:100px;
-  border-top:2px dashed rgba(255,255,255,.22);
-  transform:rotate(-7deg);
-  transform-origin:left center;
-}
-
-.route:before,
-.route:after{
-  content:"";
-  position:absolute;
-  top:-6px;
-  width:11px;
-  height:11px;
-  border-radius:50%;
-  background:#b87982;
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    color:#666;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:7px;
 }
 
-.route:before{
-  left:0;
+.progress{
+    height:3px;
+    background:#222;
 }
 
-.route:after{
-  right:0;
+.progress-bar{
+    width:12.5%;
+    height:100%;
+    background:#fff;
+    transition:.4s;
 }
 
-.location{
-  position:absolute;
-  top:55%;
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.45);
+.level{
+    display:none;
+    animation:fade .35s ease;
 }
 
-.location.from{
-  left:6%;
+.level.active{
+    display:block;
 }
 
-.location.to{
-  right:4%;
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
-
-
-/* AIRPLANE */
 
-.plane{
-  position:absolute;
-  left:7%;
-  top:43%;
-  z-index:10;
-  font-size:38px;
-  filter:drop-shadow(0 8px 12px rgba(0,0,0,.55));
-  animation:flyPlane 7s cubic-bezier(.2,.7,.25,1) forwards;
+.level-number{
+    color:#666;
+    font-size:11px;
+    letter-spacing:3px;
+    margin-bottom:7px;
 }
 
-.plane-trail{
-  position:absolute;
-  left:7%;
-  top:49%;
-  width:0;
-  height:1px;
-  background:rgba(255,255,255,.35);
-  animation:trail 7s ease-out forwards;
+.level-title{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:8px;
 }
 
-
-/* TRAVEL TEXT */
-
-.travel-content{
-  position:absolute;
-  left:22px;
-  right:22px;
-  top:55px;
-  z-index:20;
+.level-description{
+    color:#858585;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:22px;
 }
 
-.travel-title{
-  font-family:"Playfair Display",serif;
-  font-size:42px;
-  line-height:1;
+.panel{
+    border:1px solid #262626;
+    background:#0d0d0d;
+    padding:18px;
+    margin-bottom:14px;
 }
 
-.travel-status{
-  margin-top:8px;
-  color:rgba(255,255,255,.45);
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
+.clue{
+    border-left:2px solid #888;
+    background:#111;
+    padding:14px;
+    margin:16px 0;
+    color:#aaa;
+    font-size:12px;
+    line-height:1.6;
 }
-
 
-/* FLIGHT HUD */
-
-.flight-hud{
-  position:absolute;
-  left:22px;
-  right:22px;
-  bottom:28px;
-  z-index:20;
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
+.clue strong{
+    color:#fff;
 }
 
-.hud-label{
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.4);
+.hint{
+    border:1px dashed #333;
+    padding:13px;
+    margin-top:14px;
+    color:#777;
+    font-size:11px;
+    line-height:1.6;
 }
 
-.hud-value{
-  margin-top:5px;
-  font-size:16px;
+.hint b{
+    color:#aaa;
 }
 
-.flight-time{
-  font-size:10px;
-  color:rgba(255,255,255,.4);
+.objects{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
-
 
-/* ARRIVAL */
-
-.arrival{
-  position:absolute;
-  inset:0;
-  z-index:50;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px;
-  background:#eee8dc;
-  color:#151313;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 1.2s ease;
+.object{
+    min-height:100px;
+    background:#111;
+    border:1px solid #292929;
+    color:#aaa;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    transition:.2s;
 }
 
-.travel.arrived .arrival{
-  opacity:1;
-  pointer-events:auto;
+.object:hover{
+    background:#181818;
+    border-color:#555;
+    color:#fff;
 }
 
-.arrival-inner{
-  max-width:500px;
+.object-icon{
+    font-size:26px;
 }
 
-.arrival small{
-  font-size:8px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:#777;
+.object span:last-child{
+    font-size:10px;
+    letter-spacing:1px;
 }
 
-.arrival h2{
-  color:#171414;
-  margin:16px 0 20px;
-  font-size:48px;
+.hidden-result{
+    display:none;
+    margin-top:14px;
+    padding:15px;
+    border:1px solid #444;
+    text-align:center;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:5px;
 }
 
-.arrival p{
-  color:#625d56;
-  max-width:420px;
-  margin:auto;
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    max-width:330px;
+    margin:auto;
 }
 
-.arrival-stamp{
-  display:inline-block;
-  border:1px solid #aaa093;
-  padding:12px 20px;
-  margin-top:30px;
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+.key{
+    height:60px;
+    background:#111;
+    border:1px solid #292929;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
 }
 
-.restart-flight{
-  display:block;
-  margin:20px auto 0;
-  border:1px solid #777;
-  background:none;
-  padding:12px 18px;
-  font-size:8px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  cursor:pointer;
+.key:hover{
+    background:#202020;
 }
-
 
-/* =========================
-   CHAPTERS
-========================= */
-
-.chapter{
-  background:#09090b;
+.key.clear{
+    color:#777;
 }
 
-.chapter-number{
-  font-size:9px;
-  letter-spacing:4px;
-  color:#a56c75;
-  margin-bottom:15px;
+.display{
+    height:55px;
+    border:1px solid #292929;
+    background:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:10px;
+    font-size:24px;
+    letter-spacing:7px;
 }
 
-.chapter h2{
-  margin-bottom:25px;
+.shapes{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.chapter p{
-  max-width:470px;
+.shape{
+    width:70px;
+    height:70px;
+    border:1px solid #333;
+    background:#111;
+    color:#ddd;
+    cursor:pointer;
+    font-size:28px;
 }
-
-
-/* =========================
-   PHOTOS
-========================= */
 
-.photos{
-  background:#0c0c0e;
+.shape:hover{
+    background:#1c1c1c;
 }
 
-.photo-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:35px;
+.sequence{
+    min-height:55px;
+    border:1px dashed #333;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    font-size:25px;
+    margin-bottom:15px;
+    color:#aaa;
 }
 
-.photo{
-  height:230px;
-  overflow:hidden;
-  background:#151515;
-  cursor:pointer;
+.words{
+    display:grid;
+    gap:9px;
 }
 
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .7s ease;
+.word{
+    background:#111;
+    border:1px solid #292929;
+    padding:15px;
+    cursor:pointer;
+    color:#999;
+    transition:.2s;
 }
 
-.photo:hover img{
-  transform:scale(1.06);
+.word:hover{
+    color:#fff;
+    border-color:#555;
 }
 
-
-/* =========================
-   VIEWER
-========================= */
-
-.viewer{
-  position:fixed;
-  inset:0;
-  z-index:500;
-  background:rgba(0,0,0,.96);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+.word.selected{
+    color:#fff;
+    border-color:#aaa;
+    background:#181818;
 }
 
-.viewer.show{
-  display:flex;
+.files{
+    display:grid;
+    gap:10px;
 }
 
-.viewer img{
-  max-width:100%;
-  max-height:82vh;
-  object-fit:contain;
+.file{
+    border:1px solid #292929;
+    background:#111;
+    padding:17px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.close-viewer{
-  position:absolute;
-  right:25px;
-  top:20px;
-  border:0;
-  background:none;
-  color:white;
-  font-size:28px;
+.file:hover{
+    border-color:#666;
 }
-
-
-/* =========================
-   LETTER
-========================= */
 
-.letter{
-  background:#eee8dc;
-  color:#161414;
+.file-name{
+    font-size:12px;
+    font-weight:600;
 }
 
-.letter .eyebrow{
-  color:#555;
+.file-color{
+    width:12px;
+    height:12px;
+    border-radius:50%;
 }
 
-.letter h2{
-  color:#161414;
-}
+.blue{background:#4d76ff}
+.white{background:#fff}
+.green{background:#52c878}
+.red{background:#e85555}
 
-.letter p{
-  color:#5d5851;
-  margin-top:25px;
-  max-width:500px;
+.lockbox{
+    text-align:center;
 }
 
-.signature{
-  margin-top:35px;
-  font-family:"Playfair Display",serif;
-  font-size:22px;
-  font-style:italic;
+.lock-symbol{
+    font-size:50px;
+    margin-bottom:15px;
 }
-
-
-/* =========================
-   FILM STRIP
-========================= */
 
-.strip{
-  background:#09090b;
+.identity{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
 }
 
-.strip-wrap{
-  display:flex;
-  overflow-x:auto;
-  gap:8px;
-  margin-top:35px;
-  padding-bottom:15px;
-  scrollbar-width:none;
+.identity-card{
+    border:1px solid #292929;
+    background:#111;
+    padding:20px 8px;
+    text-align:center;
+    cursor:pointer;
 }
 
-.strip-wrap::-webkit-scrollbar{
-  display:none;
+.identity-card:hover{
+    border-color:#777;
 }
 
-.frame{
-  flex:0 0 190px;
-  height:270px;
-  padding:9px;
-  background:#151515;
-  border:1px solid rgba(255,255,255,.08);
+.identity-card small{
+    display:block;
+    color:#555;
+    font-size:9px;
+    margin-top:6px;
 }
 
-.frame img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.answer-input{
+    width:100%;
+    background:#090909;
+    border:1px solid #333;
+    padding:16px;
+    color:#fff;
+    outline:none;
+    text-align:center;
+    font-size:15px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
-
-/* =========================
-   MUSIC
-========================= */
-
-.music{
-  text-align:center;
-  align-items:center;
-  background:
-    radial-gradient(circle,rgba(137,62,75,.18),transparent 45%),
-    #090909;
+.answer-input:focus{
+    border-color:#888;
 }
 
-.album{
-  width:210px;
-  height:210px;
-  margin:30px auto;
-  overflow:hidden;
+.btn{
+    width:100%;
+    border:1px solid #444;
+    background:#fff;
+    color:#000;
+    padding:15px;
+    margin-top:12px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+    cursor:pointer;
 }
 
-.album img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.btn:hover{
+    background:#ddd;
 }
 
-.music-title{
-  font-family:"Playfair Display",serif;
-  font-size:25px;
+.message{
+    min-height:20px;
+    text-align:center;
+    font-size:11px;
+    margin-top:12px;
+    color:#777;
 }
 
-.music-sub{
-  font-size:10px;
-  opacity:.4;
-  margin-top:5px;
+.message.success{
+    color:#fff;
 }
 
-.music-btn{
-  width:55px;
-  height:55px;
-  margin-top:25px;
-  border-radius:50%;
-  border:1px solid rgba(255,255,255,.3);
-  background:none;
-  color:white;
+.message.error{
+    color:#777;
 }
-
-
-/* =========================
-   FINAL
-========================= */
 
 .final{
-  text-align:center;
-  align-items:center;
-  background:
-    radial-gradient(circle,rgba(129,48,63,.28),transparent 55%),
-    #080808;
+    display:none;
+    text-align:center;
+    padding-top:25px;
+    animation:fade 1s ease;
+}
+
+.final.show{
+    display:block;
+}
+
+.final-label{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#666;
 }
 
 .final h2{
-  font-size:clamp(45px,12vw,75px);
-  max-width:650px;
+    font-size:clamp(38px,10vw,75px);
+    letter-spacing:-4px;
+    margin:20px 0;
 }
 
-.final p{
-  max-width:370px;
-  margin-top:25px;
+.final-photo{
+    width:100%;
+    max-width:500px;
+    max-height:520px;
+    object-fit:cover;
+    border:1px solid #333;
+    display:block;
+    margin:25px auto;
 }
 
-.final-ticket{
-  margin-top:45px;
-  padding:14px 22px;
-  border:1px solid rgba(255,255,255,.15);
-  color:#b87982;
-  font-size:8px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+.final-text{
+    color:#888;
+    line-height:1.8;
+    font-size:13px;
+    max-width:500px;
+    margin:auto;
 }
 
-
-/* =========================
-   PLAYER
-========================= */
-
-.player{
-  position:fixed;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  z-index:100;
-  width:calc(100% - 35px);
-  max-width:420px;
-  padding:12px 16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:rgba(15,15,15,.88);
-  backdrop-filter:blur(15px);
-  border:1px solid rgba(255,255,255,.1);
-  opacity:0;
-  pointer-events:none;
-  transition:.5s;
+.restart{
+    margin-top:25px;
+    background:transparent;
+    color:#777;
+    border:1px solid #333;
+    padding:12px 18px;
+    cursor:pointer;
 }
 
-.player.show{
-  opacity:1;
-  pointer-events:auto;
+@media(max-width:500px){
+    .identity{
+        grid-template-columns:1fr;
+    }
+
+    .shape{
+        width:60px;
+        height:60px;
+    }
 }
-
-.player button{
-  border:0;
-  background:none;
-  color:white;
-}
-
-.player-info{
-  flex:1;
-}
-
-.player-info strong{
-  display:block;
-  font-size:11px;
-  font-weight:500;
-}
-
-.player-info span{
-  display:block;
-  font-size:8px;
-  opacity:.4;
-}
-
-
-/* =========================
-   ANIMATIONS
-========================= */
-
-@keyframes flyPlane{
-
-  0%{
-    left:7%;
-    top:43%;
-    transform:rotate(-7deg);
-  }
-
-  30%{
-    left:32%;
-    top:35%;
-    transform:rotate(-3deg);
-  }
-
-  60%{
-    left:60%;
-    top:39%;
-    transform:rotate(3deg);
-  }
-
-  100%{
-    left:88%;
-    top:54%;
-    transform:rotate(8deg);
-  }
-
-}
-
-@keyframes trail{
-
-  0%{
-    width:0;
-  }
-
-  100%{
-    width:80%;
-  }
-
-}
-
-@keyframes cloudMove{
-
-  from{
-    transform:translateX(0);
-  }
-
-  to{
-    transform:translateX(1000px);
-  }
-
-}
-
-
-/* =========================
-   DESKTOP
-========================= */
-
-@media(min-width:700px){
-
-  section{
-    padding-left:10%;
-    padding-right:10%;
-  }
-
-  .photo-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .photo{
-    height:350px;
-  }
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<div class="app">
 
-<!-- =========================
-     INTRO
-========================= -->
-
-<div class="intro" id="intro">
-
-  <div class="ticket">
-
-    <div class="ticket-top">
-
-      <div class="ticket-label">
-        A private screening
-      </div>
-
-      <div class="ticket-title">
-        One Ticket<br>
-        For Two
-      </div>
-
-      <div class="ticket-route">
-
-        <div class="ticket-city">
-          <small>FROM</small>
-          <strong>ME</strong>
+    <div class="header">
+        <div class="header-top">
+            <div class="system">ESCAPE SYSTEM / 01</div>
+            <div class="status">LOCKED</div>
         </div>
 
-        <div class="arrow">
-          →
+        <h1>ESCAPE<br>THE SCREEN.</h1>
+
+        <div class="subtitle">
+            Something is keeping you here.<br>
+            Solve the system. Follow the clues. Escape.
         </div>
 
-        <div class="ticket-city">
-          <small>TO</small>
-          <strong>YOU</strong>
+        <div class="progress-wrap">
+            <div class="progress-label">
+                <span>PROGRESS</span>
+                <span id="progressText">01 / 08</span>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- LEVEL 1 -->
+    <section class="level active" id="level1">
+
+        <div class="level-number">LEVEL 01</div>
+        <div class="level-title">THE ROOM</div>
+
+        <div class="level-description">
+            Four objects are inside the room.
+            One of them contains the first clue.
         </div>
 
-      </div>
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                Not everything in this room is meant to be opened.
+                Look for the object that hides something.
+            </div>
+
+            <div class="objects">
+
+                <button class="object" onclick="objectFound('A')">
+                    <div class="object-icon">🪑</div>
+                    <span>OBJECT A</span>
+                </button>
+
+                <button class="object" onclick="objectFound('B')">
+                    <div class="object-icon">🕰</div>
+                    <span>OBJECT B</span>
+                </button>
+
+                <button class="object" onclick="objectFound('C')">
+                    <div class="object-icon">🖼</div>
+                    <span>OBJECT C</span>
+                </button>
+
+                <button class="object" onclick="objectFound('D')">
+                    <div class="object-icon">🗄</div>
+                    <span>OBJECT D</span>
+                </button>
+
+            </div>
+
+            <div class="hidden-result" id="objectResult"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                Think about which object can actually hide something inside it.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 2 -->
+    <section class="level" id="level2">
+
+        <div class="level-number">LEVEL 02</div>
+        <div class="level-title">THE KEYPAD</div>
+
+        <div class="level-description">
+            A four-digit lock is waiting.
+            The previous clue gave you part of the answer.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                The first two digits came from the previous room.
+                The last two digits are the number of this level.
+            </div>
+
+            <div class="display" id="keyDisplay">----</div>
+
+            <div class="keypad">
+
+                <button class="key" onclick="pressKey('1')">1</button>
+                <button class="key" onclick="pressKey('2')">2</button>
+                <button class="key" onclick="pressKey('3')">3</button>
+
+                <button class="key" onclick="pressKey('4')">4</button>
+                <button class="key" onclick="pressKey('5')">5</button>
+                <button class="key" onclick="pressKey('6')">6</button>
+
+                <button class="key" onclick="pressKey('7')">7</button>
+                <button class="key" onclick="pressKey('8')">8</button>
+                <button class="key" onclick="pressKey('9')">9</button>
+
+                <button class="key clear" onclick="clearKey()">C</button>
+                <button class="key" onclick="pressKey('0')">0</button>
+                <button class="key" onclick="checkKey()">✓</button>
+
+            </div>
+
+            <div class="message" id="keyMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                You already know the first two digits. Add 02 after them.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 3 -->
+    <section class="level" id="level3">
+
+        <div class="level-number">LEVEL 03</div>
+        <div class="level-title">THE SEQUENCE</div>
+
+        <div class="level-description">
+            Four symbols. One correct order.
+            Click them in the order you believe is correct.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                Start with the simplest shape.
+                End with the most complex.
+            </div>
+
+            <div class="sequence" id="shapeSequence">
+                ?
+            </div>
+
+            <div class="shapes">
+
+                <button class="shape" onclick="chooseShape('○')">○</button>
+                <button class="shape" onclick="chooseShape('△')">△</button>
+                <button class="shape" onclick="chooseShape('□')">□</button>
+                <button class="shape" onclick="chooseShape('✕')">✕</button>
+
+            </div>
+
+            <button class="btn" onclick="checkShapes()">CHECK SEQUENCE</button>
+
+            <div class="message" id="shapeMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                Think basic geometry: circle → triangle → square → X.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 4 -->
+    <section class="level" id="level4">
+
+        <div class="level-number">LEVEL 04</div>
+        <div class="level-title">THE MESSAGE</div>
+
+        <div class="level-description">
+            Some words are hiding inside a wall of text.
+            Select the four words that matter.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                The system likes colors.
+                Four of them will open the next door.
+            </div>
+
+            <div class="words">
+
+                <div class="word" onclick="selectWord(this,'BLUE')">
+                    BLUE
+                </div>
+
+                <div class="word" onclick="selectWord(this,'SILVER')">
+                    SILVER
+                </div>
+
+                <div class="word" onclick="selectWord(this,'WHITE')">
+                    WHITE
+                </div>
+
+                <div class="word" onclick="selectWord(this,'BLACK')">
+                    BLACK
+                </div>
+
+                <div class="word" onclick="selectWord(this,'GREEN')">
+                    GREEN
+                </div>
+
+                <div class="word" onclick="selectWord(this,'GOLD')">
+                    GOLD
+                </div>
+
+                <div class="word" onclick="selectWord(this,'RED')">
+                    RED
+                </div>
+
+            </div>
+
+            <button class="btn" onclick="checkWords()">CHECK WORDS</button>
+
+            <div class="message" id="wordMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                You need exactly four colors. Look for BLUE, WHITE, GREEN and RED.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 5 -->
+    <section class="level" id="level5">
+
+        <div class="level-number">LEVEL 05</div>
+        <div class="level-title">THE FILES</div>
+
+        <div class="level-description">
+            Four files are stored inside the system.
+            Only one matches the previous clue.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                Open the file whose color was important in the previous message.
+            </div>
+
+            <div class="files">
+
+                <div class="file" onclick="chooseFile('A')">
+                    <div class="file-name">FILE_A</div>
+                    <div class="file-color blue"></div>
+                </div>
+
+                <div class="file" onclick="chooseFile('B')">
+                    <div class="file-name">FILE_B</div>
+                    <div class="file-color white"></div>
+                </div>
+
+                <div class="file" onclick="chooseFile('C')">
+                    <div class="file-name">FILE_C</div>
+                    <div class="file-color green"></div>
+                </div>
+
+                <div class="file" onclick="chooseFile('D')">
+                    <div class="file-name">FILE_D</div>
+                    <div class="file-color red"></div>
+                </div>
+
+            </div>
+
+            <div class="message" id="fileMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                The answer is the second color in the sequence from Level 04.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 6 -->
+    <section class="level" id="level6">
+
+        <div class="level-number">LEVEL 06</div>
+        <div class="level-title">THE LOCKBOX</div>
+
+        <div class="level-description">
+            The lockbox asks for one symbol.
+            It was already revealed earlier.
+        </div>
+
+        <div class="panel lockbox">
+
+            <div class="lock-symbol">🔒</div>
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                You don't need to discover a new symbol.
+                Remember the sequence from Level 03.
+            </div>
+
+            <div class="shapes">
+
+                <button class="shape" onclick="checkLockSymbol('○')">○</button>
+                <button class="shape" onclick="checkLockSymbol('△')">△</button>
+                <button class="shape" onclick="checkLockSymbol('□')">□</button>
+                <button class="shape" onclick="checkLockSymbol('✕')">✕</button>
+
+            </div>
+
+            <div class="message" id="lockMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                Which symbol came FIRST in the correct sequence?
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 7 -->
+    <section class="level" id="level7">
+
+        <div class="level-number">LEVEL 07</div>
+        <div class="level-title">IDENTITY</div>
+
+        <div class="level-description">
+            The system wants to know who this entire escape room was made for.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>CLUE</strong><br>
+                Three pieces make one identity.
+                Find all three.
+            </div>
+
+            <div class="identity">
+
+                <div class="identity-card" onclick="identityPart('MARY')">
+                    MARY
+                    <small>FIRST</small>
+                </div>
+
+                <div class="identity-card" onclick="identityPart('GRACE')">
+                    GRACE
+                    <small>MIDDLE</small>
+                </div>
+
+                <div class="identity-card" onclick="identityPart('RANES')">
+                    RANES
+                    <small>LAST</small>
+                </div>
+
+            </div>
+
+            <div class="message" id="identityMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                The three names together form one person's full name.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LEVEL 8 -->
+    <section class="level" id="level8">
+
+        <div class="level-number">LEVEL 08</div>
+        <div class="level-title">FINAL VERIFICATION</div>
+
+        <div class="level-description">
+            One final answer.
+            Type the identity you discovered.
+        </div>
+
+        <div class="panel">
+
+            <div class="clue">
+                <strong>FINAL CLUE</strong><br>
+                First name + middle name + last name.
+                Spaces are allowed.
+            </div>
+
+            <input
+                id="finalAnswer"
+                class="answer-input"
+                type="text"
+                placeholder="ENTER FULL NAME"
+                autocomplete="off"
+            >
+
+            <button class="btn" onclick="checkFinalAnswer()">
+                VERIFY IDENTITY
+            </button>
+
+            <div class="message" id="finalMessage"></div>
+
+            <div class="hint">
+                💡 <b>HINT:</b>
+                You already found all three parts in Level 07.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL -->
+    <div class="final" id="finalScreen">
+
+        <div class="final-label">SYSTEM UNLOCKED</div>
+
+        <h2>YOU<br>ESCAPED.</h2>
+
+        <img
+            class="final-photo"
+            src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg"
+            alt="Final reveal"
+        >
+
+        <div class="final-text">
+            You solved every lock.<br>
+            You followed every clue.<br>
+            You made it to the end.
+            <br><br>
+            But the real secret was never the screen.
+            <br><br>
+            <strong>It was always you, Mary Grace Ranes.</strong>
+        </div>
+
+        <button class="restart" onclick="restartGame()">
+            RUN SYSTEM AGAIN
+        </button>
 
     </div>
-
-
-    <div class="ticket-bottom">
-
-      <div class="ticket-info">
-        <small>DATE</small>
-        <span>04.09.26</span>
-      </div>
-
-      <div class="ticket-info">
-        <small>SEATS</small>
-        <span>02 / 02</span>
-      </div>
-
-      <div class="ticket-info">
-        <small>CLASS</small>
-        <span>FOREVER</span>
-      </div>
-
-    </div>
-
-
-    <button class="enter" onclick="enterMovie()">
-      Enter The Movie
-    </button>
-
-  </div>
 
 </div>
-
-
-
-<main id="main">
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="eyebrow">
-      A movie about us
-    </div>
-
-    <h1 class="hero-title">
-      One Ticket<br>
-      <em>For Two.</em>
-    </h1>
-
-    <p class="hero-copy">
-      If our story were a movie,
-      I wouldn't want to watch it alone.
-    </p>
-
-  </div>
-
-  <div class="scroll">
-    Scroll to begin
-  </div>
-
-</section>
-
-
-
-<!-- MOVIE INFO -->
-
-<section class="movie-info">
-
-  <div class="eyebrow">
-    The film
-  </div>
-
-  <h2>
-    Some stories<br>
-    deserve a screen.
-  </h2>
-
-  <div class="movie-card">
-
-    <div class="movie-line">
-      <span>Title</span>
-      <span>One Ticket For Two</span>
-    </div>
-
-    <div class="movie-line">
-      <span>Genre</span>
-      <span>Love / Life</span>
-    </div>
-
-    <div class="movie-line">
-      <span>Starring</span>
-      <span>You & Me</span>
-    </div>
-
-    <div class="movie-line">
-      <span>Runtime</span>
-      <span>Still Going</span>
-    </div>
-
-    <div class="movie-line">
-      <span>Ending</span>
-      <span>Not Written Yet</span>
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================
-     AIRPLANE TRAVEL
-========================= -->
-
-<section class="travel" id="travel">
-
-  <div class="sky">
-
-    <div class="stars"></div>
-
-    <div class="moon"></div>
-
-    <div class="cloud one"></div>
-    <div class="cloud two"></div>
-    <div class="cloud three"></div>
-
-    <div class="route"></div>
-
-    <div class="location from">
-      DEPARTURE
-    </div>
-
-    <div class="location to">
-      ARRIVAL
-    </div>
-
-    <div class="plane">
-      ✈
-    </div>
-
-    <div class="plane-trail"></div>
-
-  </div>
-
-
-  <div class="travel-content">
-
-    <div class="eyebrow">
-      Scene 03 · Departure
-    </div>
-
-    <div class="travel-title">
-      Let's go somewhere
-      together.
-    </div>
-
-    <div class="travel-status" id="travelStatus">
-      Preparing for departure
-    </div>
-
-  </div>
-
-
-  <div class="flight-hud">
-
-    <div>
-
-      <div class="hud-label">
-        Flight
-      </div>
-
-      <div class="hud-value">
-        J × B 0904
-      </div>
-
-    </div>
-
-
-    <div style="text-align:right">
-
-      <div class="hud-label">
-        Status
-      </div>
-
-      <div class="flight-time" id="flightStatus">
-        Boarding
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ARRIVAL -->
-
-  <div class="arrival">
-
-    <div class="arrival-inner">
-
-      <small>
-        We've arrived
-      </small>
-
-      <h2>
-        Wherever we go,
-        I want you there.
-      </h2>
-
-      <p>
-        The destination was never the most
-        important part of the trip.
-        It was having someone beside me
-        while getting there.
-      </p>
-
-      <div class="arrival-stamp">
-        Destination · Us
-      </div>
-
-      <button class="restart-flight" onclick="restartFlight()">
-        Take The Flight Again
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- CHAPTER 04 -->
-
-<section class="chapter">
-
-  <div class="chapter-number">
-    Chapter 04
-  </div>
-
-  <h2>
-    The best part<br>
-    wasn't the destination.
-  </h2>
-
-  <p>
-    It was knowing that somewhere along
-    the way, I had someone beside me.
-    Someone I wanted to share the view with.
-  </p>
-
-</section>
-
-
-
-<!-- PHOTOS -->
-
-<section class="photos">
-
-  <div class="eyebrow">
-    Movie stills
-  </div>
-
-  <h2>
-    My favorite scenes
-    are the ones with you.
-  </h2>
-
-
-  <div class="photo-grid">
-
-    <div class="photo">
-      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
-    </div>
-
-    <div class="photo">
-      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- LETTER -->
-
-<section class="letter">
-
-  <div>
-
-    <div class="eyebrow">
-      Between takes
-    </div>
-
-    <h2>
-      There are things
-      I don't always say.
-    </h2>
-
-    <p>
-      I don't know what the future is going
-      to look like. I don't know every place
-      we'll go, every problem we'll face,
-      or every chapter waiting for us.
-    </p>
-
-    <p>
-      But if I get to choose my favorite
-      person to experience those moments
-      with, I'd choose you.
-    </p>
-
-    <p>
-      Because I don't need a perfect movie.
-      I just want a real story with you.
-    </p>
-
-    <div class="signature">
-      — me, always choosing you
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- FILM STRIP -->
-
-<section class="strip">
-
-  <div class="eyebrow">
-    Roll the film
-  </div>
-
-  <h2>
-    A few frames<br>
-    I'd keep forever.
-  </h2>
-
-
-  <div class="strip-wrap">
-
-    <div class="frame">
-      <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.9oDOCCrwe-68ysLHTxM8x0OFCqNx0unnl6IPjXeGick.webp.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.dxVrpz5CFicrFlhsH4_HBTjqow0Wnvzpxzh6wFa8jng.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.Jr0-cisZdHMb-42ePl7aLX1ohblw6zZwoSdxxarrToc.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.JtDwQAQHdf_SdmXunn3nftLqXULfan0x-lwsBEnxoqs.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.KQBr38IqOa6wXPvkkgj2vBCIfTQhjlWdr7_miZkNv7A.jpeg">
-    </div>
-
-    <div class="frame">
-      <img src="att.mrOSrZs_omicGNRYyw2eOrluHgrZ4JTsEQzY9iCnnhQ.jpeg">
-    </div>
-
-  </div>
-
-</section>
-
-
-
-<!-- MUSIC -->
-
-<section class="music">
-
-  <div class="eyebrow">
-    Original soundtrack
-  </div>
-
-  <div class="album">
-
-    <img src="att.97vp2zl5u6zg5e1ga2nZvjJr63US-mqfEx8krTg7Dy4.jpeg">
-
-  </div>
-
-  <div class="music-title">
-    Paraluman
-  </div>
-
-  <div class="music-sub">
-    Adie · Our soundtrack
-  </div>
-
-  <button
-    class="music-btn"
-    id="musicBtn"
-    onclick="toggleMusic()">
-    ▶
-  </button>
-
-  <audio id="audio" loop>
-
-    <source
-      src="Adie - Paraluman (Lyrics).mp3"
-      type="audio/mpeg">
-
-  </audio>
-
-</section>
-
-
-
-<!-- FINAL -->
-
-<section class="final">
-
-  <div class="eyebrow">
-    End credits
-  </div>
-
-  <h2>
-    The movie isn't over.
-  </h2>
-
-  <p>
-    We just haven't filmed
-    the best parts yet.
-  </p>
-
-  <div class="final-ticket">
-    Admit two · No expiration
-  </div>
-
-</section>
-
-</main>
-
-
-
-<!-- PHOTO VIEWER -->
-
-<div class="viewer" id="viewer">
-
-  <button
-    class="close-viewer"
-    onclick="closeViewer()">
-    ×
-  </button>
-
-  <img id="viewerImg">
-
-</div>
-
-
-
-<!-- MINI MUSIC PLAYER -->
-
-<div class="player" id="player">
-
-  <button
-    id="playerBtn"
-    onclick="toggleMusic()">
-    ▶
-  </button>
-
-  <div class="player-info">
-
-    <strong>
-      Paraluman
-    </strong>
-
-    <span>
-      Adie
-    </span>
-
-  </div>
-
-</div>
-
 
 
 <script>
 
-/* =========================
-   INTRO
-========================= */
+let currentLevel = 1;
+let keyInput = "";
+let shapeInput = [];
+let selectedWords = [];
+let identity = [];
 
-const intro =
-document.getElementById("intro");
+const correctCode = "0702";
+const correctShapes = ["○","△","□","✕"];
+const correctWords = ["BLUE","WHITE","GREEN","RED"];
+const correctIdentity = ["MARY","GRACE","RANES"];
 
-const main =
-document.getElementById("main");
+function updateProgress(){
 
-const audio =
-document.getElementById("audio");
+    document.getElementById("progressText").textContent =
+        String(currentLevel).padStart(2,"0") + " / 08";
 
-const musicBtn =
-document.getElementById("musicBtn");
-
-const playerBtn =
-document.getElementById("playerBtn");
-
-const player =
-document.getElementById("player");
-
-
-function enterMovie(){
-
-  intro.classList.add("hide");
-
-  setTimeout(function(){
-
-    main.classList.add("show");
-
-    player.classList.add("show");
-
-  },500);
-
-  audio.play().then(function(){
-
-    musicBtn.textContent="❚❚";
-    playerBtn.textContent="❚❚";
-
-  }).catch(function(){
-
-    musicBtn.textContent="▶";
-    playerBtn.textContent="▶";
-
-  });
-
+    document.getElementById("progressBar").style.width =
+        ((currentLevel / 8) * 100) + "%";
 }
 
 
+function showLevel(number){
 
-/* =========================
-   MUSIC
-========================= */
+    document.querySelectorAll(".level").forEach(level=>{
+        level.classList.remove("active");
+    });
 
-function toggleMusic(){
+    const next = document.getElementById("level" + number);
 
-  if(audio.paused){
-
-    audio.play();
-
-    musicBtn.textContent="❚❚";
-    playerBtn.textContent="❚❚";
-
-  }else{
-
-    audio.pause();
-
-    musicBtn.textContent="▶";
-    playerBtn.textContent="▶";
-
-  }
-
-}
-
-
-
-/* =========================
-   AIRPLANE FLIGHT
-========================= */
-
-const travel =
-document.getElementById("travel");
-
-const travelStatus =
-document.getElementById("travelStatus");
-
-const flightStatus =
-document.getElementById("flightStatus");
-
-
-function startFlight(){
-
-  travel.classList.remove("arrived");
-
-  travelStatus.textContent =
-  "Preparing for departure";
-
-  flightStatus.textContent =
-  "Boarding";
-
-  setTimeout(function(){
-
-    travelStatus.textContent =
-    "We're taking off";
-
-    flightStatus.textContent =
-    "Takeoff";
-
-  },1200);
-
-
-  setTimeout(function(){
-
-    travelStatus.textContent =
-    "Somewhere between here and there";
-
-    flightStatus.textContent =
-    "In flight";
-
-  },2800);
-
-
-  setTimeout(function(){
-
-    travelStatus.textContent =
-    "Almost there";
-
-    flightStatus.textContent =
-    "Landing";
-
-  },5600);
-
-
-  setTimeout(function(){
-
-    travel.classList.add("arrived");
-
-  },7000);
-
-}
-
-
-function restartFlight(){
-
-  travel.classList.remove("arrived");
-
-  void travel.offsetWidth;
-
-  startFlight();
-
-}
-
-
-
-/* Start when travel section enters */
-
-let flightStarted=false;
-
-const flightObserver =
-new IntersectionObserver(function(entries){
-
-  entries.forEach(function(entry){
-
-    if(entry.isIntersecting && !flightStarted){
-
-      flightStarted=true;
-
-      startFlight();
-
+    if(next){
+        next.classList.add("active");
     }
 
-  });
+    currentLevel = number;
+    updateProgress();
 
-},{threshold:.35});
-
-
-flightObserver.observe(travel);
-
-
-
-/* =========================
-   PHOTO VIEWER
-========================= */
-
-const photos =
-document.querySelectorAll(".photo img");
-
-const viewer =
-document.getElementById("viewer");
-
-const viewerImg =
-document.getElementById("viewerImg");
-
-
-photos.forEach(function(img){
-
-  img.addEventListener("click",function(){
-
-    viewerImg.src=img.src;
-
-    viewer.classList.add("show");
-
-  });
-
-});
-
-
-function closeViewer(){
-
-  viewer.classList.remove("show");
-
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 
-viewer.addEventListener("click",function(e){
+function objectFound(letter){
 
-  if(e.target===viewer){
+    const result = document.getElementById("objectResult");
 
-    closeViewer();
+    if(letter === "D"){
 
-  }
+        result.style.display = "block";
+        result.textContent = "07";
 
-});
+        setTimeout(()=>{
+            showLevel(2);
+        },900);
+
+    }else{
+
+        result.style.display = "block";
+        result.textContent = "NOTHING";
+
+        setTimeout(()=>{
+            result.style.display = "none";
+        },700);
+    }
+}
 
 
+function pressKey(number){
 
-/* =========================
-   SECTION FADE
-========================= */
+    if(keyInput.length >= 4) return;
 
-const observer =
-new IntersectionObserver(function(entries){
+    keyInput += number;
 
-  entries.forEach(function(entry){
+    document.getElementById("keyDisplay").textContent =
+        keyInput.padEnd(4,"-");
+}
 
-    if(entry.isIntersecting){
 
-      entry.target.style.opacity="1";
+function clearKey(){
 
-      entry.target.style.transform=
-      "translateY(0)";
+    keyInput = "";
 
+    document.getElementById("keyDisplay").textContent = "----";
+
+    document.getElementById("keyMessage").textContent = "";
+}
+
+
+function checkKey(){
+
+    const message = document.getElementById("keyMessage");
+
+    if(keyInput === correctCode){
+
+        message.textContent = "ACCESS GRANTED";
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(3);
+        },700);
+
+    }else{
+
+        message.textContent = "WRONG CODE — FOLLOW THE CLUE";
+        message.className = "message error";
+
+        keyInput = "";
+
+        document.getElementById("keyDisplay").textContent = "----";
+    }
+}
+
+
+function chooseShape(shape){
+
+    if(shapeInput.length >= 4) return;
+
+    shapeInput.push(shape);
+
+    document.getElementById("shapeSequence").textContent =
+        shapeInput.join("   ");
+}
+
+
+function checkShapes(){
+
+    const message = document.getElementById("shapeMessage");
+
+    const correct =
+        shapeInput.length === 4 &&
+        shapeInput.every((value,index)=>
+            value === correctShapes[index]
+        );
+
+    if(correct){
+
+        message.textContent = "SEQUENCE ACCEPTED";
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(4);
+        },700);
+
+    }else{
+
+        message.textContent = "WRONG ORDER — TRY AGAIN";
+        message.className = "message error";
+
+        shapeInput = [];
+
+        document.getElementById("shapeSequence").textContent = "?";
+    }
+}
+
+
+function selectWord(element,word){
+
+    if(element.classList.contains("selected")){
+
+        element.classList.remove("selected");
+
+        selectedWords =
+            selectedWords.filter(item=>item !== word);
+
+    }else{
+
+        if(selectedWords.length >= 4) return;
+
+        element.classList.add("selected");
+        selectedWords.push(word);
+    }
+}
+
+
+function checkWords(){
+
+    const message = document.getElementById("wordMessage");
+
+    const correct =
+        selectedWords.length === 4 &&
+        correctWords.every(word =>
+            selectedWords.includes(word)
+        );
+
+    if(correct){
+
+        message.textContent = "MESSAGE DECODED";
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(5);
+        },700);
+
+    }else{
+
+        message.textContent =
+            "SOMETHING IS WRONG — CHECK THE CLUE";
+
+        message.className = "message error";
+    }
+}
+
+
+function chooseFile(letter){
+
+    const message = document.getElementById("fileMessage");
+
+    if(letter === "B"){
+
+        message.textContent = "FILE ACCEPTED";
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(6);
+        },700);
+
+    }else{
+
+        message.textContent =
+            "ACCESS DENIED — THIS IS NOT THE RIGHT FILE";
+
+        message.className = "message error";
+    }
+}
+
+
+function checkLockSymbol(symbol){
+
+    const message = document.getElementById("lockMessage");
+
+    if(symbol === "○"){
+
+        message.textContent = "LOCKBOX OPENED";
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(7);
+        },700);
+
+    }else{
+
+        message.textContent =
+            "WRONG SYMBOL — REMEMBER LEVEL 03";
+
+        message.className = "message error";
+    }
+}
+
+
+function identityPart(part){
+
+    if(!identity.includes(part)){
+        identity.push(part);
     }
 
-  });
+    const message =
+        document.getElementById("identityMessage");
 
-},{
-  threshold:.12
-});
+    if(
+        identity.includes("MARY") &&
+        identity.includes("GRACE") &&
+        identity.includes("RANES")
+    ){
+
+        message.textContent =
+            "IDENTITY COMPLETE: MARY GRACE RANES";
+
+        message.className = "message success";
+
+        setTimeout(()=>{
+            showLevel(8);
+        },900);
+
+    }else{
+
+        message.textContent =
+            identity.join(" + ");
+
+        message.className = "message";
+    }
+}
 
 
-document.querySelectorAll("section").forEach(function(section){
+function checkFinalAnswer(){
 
-  section.style.opacity="0";
+    const input =
+        document.getElementById("finalAnswer").value
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g," ");
 
-  section.style.transform=
-  "translateY(25px)";
+    const message =
+        document.getElementById("finalMessage");
 
-  section.style.transition=
-  "opacity 1s ease, transform 1s ease";
+    if(input === "MARY GRACE RANES"){
 
-  observer.observe(section);
+        message.textContent =
+            "IDENTITY VERIFIED — SYSTEM UNLOCKED";
 
-});
+        message.className = "message success";
 
+        setTimeout(()=>{
+            document.querySelectorAll(".level").forEach(level=>{
+                level.classList.remove("active");
+            });
+
+            document.querySelector(".header").style.display = "none";
+
+            document.getElementById("finalScreen")
+                .classList.add("show");
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        },900);
+
+    }else{
+
+        message.textContent =
+            "IDENTITY NOT RECOGNIZED — CHECK YOUR CLUES";
+
+        message.className = "message error";
+    }
+}
+
+
+function restartGame(){
+
+    location.reload();
+
+}
+
+updateProgress();
 
 </script>
 
